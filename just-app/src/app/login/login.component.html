@@ -1,0 +1,111 @@
+<div style="justify-content: center; display: flex;">
+  <div style="display: block;">
+    <div
+      style="
+        text-align: center;
+        border: 1px solid #c4bbbb;
+        width: 450px;
+        margin-top: 10px;
+        border-radius: 5px;
+      "
+    >
+      <div style="margin-bottom: 70px; margin-top: 75px; font-size: 50px;">
+        Vartalaap
+      </div>
+      <div class="Username">
+        <input
+          #username
+          placeholder="Username"
+          class="input"
+          (input)="usernameClick(username.value)"
+        />
+      </div>
+      <div>
+        <input
+          #password
+          placeholder="Password"
+          class="input"
+          (input)="passwordClick(password.value)"
+        />
+      </div>
+
+      <div
+        style="
+          justify-content: center;
+          display: flex;
+          margin-top: 20px;
+          margin-bottom: 30px;
+          text-align: center;
+        "
+        class="loginClick"
+      >
+        <div
+          (click)="login()"
+          style="
+            background: rgb(52, 165, 241);
+            width: 268px;
+            color: white;
+            border-radius: 7px;
+            align-content: center;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+          "
+        >
+          Log in
+        </div>
+      </div>
+      <div *ngIf="showRedSpan" style="padding-bottom: 10px;">
+        <span style="color: red;">Please enter username/password</span>
+      </div>
+      <div style="display: flex; justify-content: center; align-items: center;">
+        <div
+          style="
+            border-bottom: 1px solid #c4bbbb;
+            width: 100px;
+            margin-right: 20px;
+          "
+        ></div>
+        <div>OR</div>
+        <div
+          style="
+            border-bottom: 1px solid #c4bbbb;
+            width: 100px;
+            margin-left: 20px;
+          "
+        ></div>
+      </div>
+      <div
+        style="
+          align-items: center;
+          display: flex;
+          justify-content: center;
+          margin-top: 30px;
+        "
+      >
+        <img src="./assets/img/facebook.png" width="25" height="25" />
+        <div style="margin-left: 10px;">Log in with facebook</div>
+      </div>
+      <div style="margin-top: 20px; margin-bottom: 20px;">
+        <div style="color: rgb(0, 0, 175);">Forgot Password?</div>
+      </div>
+    </div>
+
+    <div
+      style="
+        text-align: center;
+        border: 1px solid #c4bbbb;
+        width: 450px;
+        margin-top: 10px;
+        border-radius: 5px;
+        padding-bottom: 25px;
+        padding-top: 25px;
+      "
+    >
+      <span style="margin-right: 10px;">Don't have an account?</span>
+      <span style="color: rgb(0, 0, 175);">Sign up</span>
+    </div>
+  </div>
+</div>
