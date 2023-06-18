@@ -1,0 +1,50 @@
+<div style="overflow: scroll; height: 100vh; overflow-x: hidden;">
+  <div
+    style="
+      padding-left: 30px;
+      padding-top: 30px;
+      border-bottom: 1px solid grey;
+      padding-bottom: 30px;
+    "
+  >
+    HOME
+  </div>
+  <div
+    style="
+      padding-left: 30px;
+      padding-top: 60px;
+      border-bottom: 1px solid grey;
+      padding-bottom: 60px;
+    "
+  >
+    What's Happening
+  </div>
+  <div *ngFor="let post of postdata" class="post">
+    <div style="display: flex; margin-top: 10px;">
+      <div class="ind-post-data" style="margin-left: 10px;">icon</div>
+      <div class="ind-post-data">{{ post.name }}</div>
+      <div class="ind-post-data">@{{ post.username }}</div>
+      <div class="ind-post-data">.</div>
+      <div class="ind-post-data">{{ post.time }}</div>
+    </div>
+    <div style="margin-top: 10px; margin-left: 50px;">
+      <div>
+        {{ post.caption }}
+      </div>
+    </div>
+    <div style="display: flex; justify-content: center; margin-top: 20px;">
+      <div style="width: 59%; height: 56%;">
+        <div style="border: 1px solid grey;">
+          <img style="width: 100%; height: 100%;" src="{{ post.imgUrl }}" />
+        </div>
+        <div style="display: flex; width: 100%; margin-top: 10px;">
+          <div class="post-actions">comments</div>
+          <div class="post-actions">retweet</div>
+          <div class="post-actions">like</div>
+          <div class="post-actions">reach</div>
+          <div class="post-actions">share</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
