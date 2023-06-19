@@ -11,7 +11,7 @@ export class ContentAreaComponent {
     {
       "name":"Shaleen",
       "username": "shaleentastic",
-      "caption":"this is my first post",
+      "caption":"this is my first post, celebraatig birthady with friend and family tonight, having dinner with my dinner  ",
       "time":"23h",
       "imgUrl":"./assets/img/vickyaali.jpg"
     },
@@ -28,6 +28,125 @@ export class ContentAreaComponent {
       "caption":"this is my new post",
       "time":"2h",
       "imgUrl":"./assets/img/ana.jpeg"
+    },
+     {
+      "name":"saniya",
+      "username": "saniyatastic",
+      "caption":"this is my repeat post",
+      "time":"3h",
+      "imgUrl":"./assets/img/zarameri.jpg"
+    },
+     {
+      "name":"saniya",
+      "username": "saniyatastic",
+      "caption":"this is my repeat post",
+      "time":"3h",
+      "imgUrl":"./assets/img/zarameri.jpg"
+    },
+     {
+      "name":"saniya",
+      "username": "saniyatastic",
+      "caption":"this is my repeat post",
+      "time":"3h",
+      "imgUrl":"./assets/img/zarameri.jpg"
+    },
+     {
+      "name":"saniya",
+      "username": "saniyatastic",
+      "caption":"this is my repeat post",
+      "time":"3h",
+      "imgUrl":"./assets/img/zarameri.jpg"
+    },
+     {
+      "name":"saniya",
+      "username": "saniyatastic",
+      "caption":"this is my repeat post",
+      "time":"3h",
+      "imgUrl":"./assets/img/zarameri.jpg"
+    },
+     {
+      "name":"saniya",
+      "username": "saniyatastic",
+      "caption":"this is my repeat post",
+      "time":"3h",
+      "imgUrl":"./assets/img/zarameri.jpg"
+    },
+     {
+      "name":"saniya",
+      "username": "saniyatastic",
+      "caption":"this is my repeat post",
+      "time":"3h",
+      "imgUrl":"./assets/img/zarameri.jpg"
+    },
+     {
+      "name":"saniya",
+      "username": "saniyatastic",
+      "caption":"this is my repeat post",
+      "time":"3h",
+      "imgUrl":"./assets/img/zarameri.jpg"
+    },
+     {
+      "name":"saniya",
+      "username": "saniyatastic",
+      "caption":"this is my repeat post",
+      "time":"3h",
+      "imgUrl":"./assets/img/zarameri.jpg"
+    },
+     {
+      "name":"saniya",
+      "username": "saniyatastic",
+      "caption":"this is my repeat post",
+      "time":"3h",
+      "imgUrl":"./assets/img/zarameri.jpg"
+    },
+     {
+      "name":"saniya",
+      "username": "saniyatastic",
+      "caption":"this is my repeat post",
+      "time":"3h",
+      "imgUrl":"./assets/img/zarameri.jpg"
+    },
+     {
+      "name":"saniya",
+      "username": "saniyatastic",
+      "caption":"this is my repeat post",
+      "time":"3h",
+      "imgUrl":"./assets/img/zarameri.jpg"
+    },
+     {
+      "name":"saniya",
+      "username": "saniyatastic",
+      "caption":"this is my repeat post",
+      "time":"3h",
+      "imgUrl":"./assets/img/zarameri.jpg"
+    },
+     {
+      "name":"saniya",
+      "username": "saniyatastic",
+      "caption":"this is my repeat post",
+      "time":"3h",
+      "imgUrl":"./assets/img/zarameri.jpg"
+    },
+     {
+      "name":"saniya",
+      "username": "saniyatastic",
+      "caption":"this is my repeat post",
+      "time":"3h",
+      "imgUrl":"./assets/img/zarameri.jpg"
+    },
+     {
+      "name":"saniya",
+      "username": "saniyatastic",
+      "caption":"this is my repeat post",
+      "time":"3h",
+      "imgUrl":"./assets/img/zarameri.jpg"
+    },
+     {
+      "name":"saniya",
+      "username": "saniyatastic",
+      "caption":"this is my repeat post",
+      "time":"3h",
+      "imgUrl":"./assets/img/zarameri.jpg"
     },
      {
       "name":"saniya",
