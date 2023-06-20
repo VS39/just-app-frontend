@@ -1,69 +1,82 @@
-<div>
-  <!-- <div style="overflow: scroll; height: 100vh; overflow-x: hidden;"> -->
-  <div
-    style="
-      padding-left: 30px;
-      padding-top: 30px;
-      border-bottom: 1px solid grey;
-      padding-bottom: 30px;
-    "
-  >
-    HOME
-  </div>
-  <div
-    style="
-      padding-left: 30px;
-      padding-top: 60px;
-      border-bottom: 1px solid grey;
-      padding-bottom: 60px;
-    "
-  >
-    What's Happening
-  </div>
-  <div *ngFor="let post of postdata" class="post">
-    <div style="display: flex; margin-top: 15px; align-items: center;">
-      <div
-        class="ind-post-data"
-        style="margin: 0px 20px 0px 20px; height: 44px; width: 5%;"
-      >
-        <img
-          style="width: 100%; height: 100%; border-radius: 50%;"
-          src="{{ post.imgUrl }}"
-        />
-      </div>
-      <div class="ind-post-data" style="font-size: 17px;">{{ post.name }}</div>
-      <div class="ind-post-data" style="color: cadetblue;">
-        @{{ post.username }}
-      </div>
-      <div class="ind-post-data">.</div>
-      <div class="ind-post-data" style="color: darkgray;">{{ post.time }}</div>
+
+<div style="overflow: scroll; height: 100vh; overflow-x: hidden">
+  <div style="padding-top: 3%">
+    <div
+      style="
+        border: 1px solid #0a3754;
+        background: #001828;
+        border-radius: 6px;
+        padding: 3%;
+      "
+    >
+      VAARTALAP
     </div>
-    <div style="margin-top: 10px; margin-left: 50px;">
-      <div
-        style="
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          font-size: 17px;
-          font-weight: 400;
-          margin-right: 50px;
-        "
-      >
-        {{ post.caption }}
-      </div>
+  </div>
+  <div style="padding-top: 3%">
+    <div
+      style="
+        border: 1px solid #0a3754;
+        background: #001828;
+        border-radius: 6px;
+        padding: 3%;
+      "
+    >
+      What's Happening
     </div>
-    <div style="display: flex; justify-content: center; margin-top: 20px;">
-      <div style="width: 59%; height: 56%;">
-        <div class="test" style="border: 1px solid grey; border-radius: 2%;">
+  </div>
+  <div *ngFor="let post of postdata" class="post" style="padding-top: 3%">
+    <div
+      style="
+        border: 1px solid #0a3754;
+        background: #001828;
+        border-radius: 6px;
+        padding: 3%;
+      "
+    >
+      <div style="display: flex; align-items: center">
+        <div
+          class="ind-post-data"
+          style="height: 44px; width: 5%"
+        >
           <img
-            style="width: 100%; height: 100%; border-radius: 2%;"
+            style="width: 100%; height: 100%; border-radius: 50%"
             src="{{ post.imgUrl }}"
           />
         </div>
-        <div style="display: flex; width: 100%; margin-top: 10px;">
-          <div class="post-actions">comments</div>
-          <div class="post-actions">retweet</div>
-          <div class="post-actions">like</div>
-          <div class="post-actions">reach</div>
-          <div class="post-actions">share</div>
+        <div class="ind-post-data" style="font-size: 17px">{{ post.name }}</div>
+        <div class="ind-post-data" style="color: cadetblue">
+          @{{ post.username }}
+        </div>
+        <div class="ind-post-data">.</div>
+        <div class="ind-post-data" style="color: darkgray">{{ post.time }}</div>
+      </div>
+      <div style="margin-top: 10px; margin-left: 50px">
+        <div
+          style="
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 17px;
+            font-weight: 400;
+            margin-right: 50px;
+          "
+        >
+          {{ post.caption }}
+        </div>
+      </div>
+      <div style="display: flex; justify-content: center; margin-top: 20px">
+        <div style="width: 59%; height: 56%">
+          <div class="test" style="border: 1px solid grey; border-radius: 2%">
+            <img
+              style="width: 100%; height: 100%; border-radius: 2%"
+              src="{{ post.imgUrl }}"
+            />
+          </div>
+          <div style="display: flex; width: 100%; margin-top: 10px">
+            <div class="post-actions">comments</div>
+            <div class="post-actions">retweet</div>
+            <div class="post-actions">like</div>
+            <div class="post-actions">reach</div>
+            <div class="post-actions">share</div>
+          </div>
         </div>
       </div>
     </div>

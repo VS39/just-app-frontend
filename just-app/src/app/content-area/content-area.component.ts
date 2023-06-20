@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class ContentAreaComponent {
 
-  postdata : any[] = [
+  postdata : any[] = [ 
     {
       "name":"Shaleen",
       "username": "shaleentastic",
