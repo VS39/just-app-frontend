@@ -1,14 +1,25 @@
-.ind-post-data{
-    margin-right: 8px;
+.ind-post-data {
+  margin-right: 8px;
 }
-.post-actions{
-    margin-right: 8px;
-    width: 20%;
-    justify-content: center;
-    display: flex;
+.post-actions {
+  margin-right: 8px;
+  width: 20%;
+  justify-content: center;
+  display: flex;
 }
-.post{
-    border-bottom: 1px solid grey;
-    padding-bottom: 10px;
+.post {
+  /* border-bottom: 1px solid grey;
+  padding-bottom: 10px; */
+}
+
+.test {
+  transition: width 1s, height 1s, transform 0.5s;
+}
+
+.test:hover {
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.03);
+  
 }
 
