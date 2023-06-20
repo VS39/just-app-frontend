@@ -9,24 +9,25 @@
         border-radius: 5px;
       "
     >
-      <div style="margin-bottom: 70px; margin-top: 75px; font-size: 50px;">
+      <div style="margin-bottom: 50px; margin-top: 75px; font-size: 50px;">
         Vartalaap
       </div>
+      <div style="margin-bottom: 30px;">
+        Sign up to see photos and videos
+        <br />
+        from your friends.
+      </div>
       <div class="Username">
-        <input
-          #username
-          placeholder="Username"
-          class="input"
-          (input)="usernameClick(username.value)"
-        />
+        <input placeholder="Mobile Number or Email" class="input" />
       </div>
       <div>
-        <input
-          #password
-          placeholder="Password"
-          class="input"
-          (input)="passwordClick(password.value)"
-        />
+        <input placeholder="Full Name" class="input" />
+      </div>
+      <div>
+        <input placeholder="Username" class="input" />
+      </div>
+      <div>
+        <input placeholder="Password" class="input" />
       </div>
 
       <div
@@ -40,7 +41,7 @@
         class="loginClick"
       >
         <div
-          (click)="login()"
+          (click)="signup()"
           style="
             background: rgb(52, 165, 241);
             width: 268px;
@@ -54,10 +55,10 @@
             cursor: pointer;
           "
         >
-          Log in
+          Sign up
         </div>
       </div>
-      <div *ngIf="showRedSpan" style="padding-bottom: 10px;">
+      <div style="padding-bottom: 10px;">
         <span style="color: red;">Please enter username/password</span>
       </div>
       <div style="display: flex; justify-content: center; align-items: center;">
@@ -105,7 +106,7 @@
       "
     >
       <span style="margin-right: 10px;">Don't have an account?</span>
-      <span (click)="signup()" style="color: rgb(0, 0, 175);">Sign up</span>
+      <span (click)="login()" style="color: rgb(0, 0, 175);">login</span>
     </div>
   </div>
 </div>
