@@ -23,3 +23,14 @@
   
 }
 
+.test {
+    /* background: red; */
+    transition: width 2s, height 2s, transform 0.5s;
+}
+
+.test:hover {
+
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.3);
+}

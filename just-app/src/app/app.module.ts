@@ -16,6 +16,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { LeftNavComponent } from './left-nav/left-nav.component';
 import { ContentAreaComponent } from './content-area/content-area.component';
 import { RightNavComponent } from './right-nav/right-nav.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { RightNavComponent } from './right-nav/right-nav.component';
     LeftNavComponent,
     ContentAreaComponent,
     RightNavComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
