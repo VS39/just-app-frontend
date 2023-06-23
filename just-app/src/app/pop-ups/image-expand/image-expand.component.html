@@ -1,0 +1,120 @@
+<div style="display: flex" class="mainColors">
+  <div style="width: 65%">
+    <!-- <div style="width: 59%; height: 56%"> -->
+    <div
+      class="imageTransition"
+      style="justify-content: center; display: flex; width: 100%;background: black;"
+    >
+      <!-- <div class="imageTransition" style="border: 1px solid grey; border-radius: 2%"> -->
+      <img
+        alt="Picture"
+        style="
+          max-width: 700px;
+          max-height: 700px;
+        "
+        src="{{ post.imgUrl }}"
+      />
+    </div>
+  </div>
+
+  <div style="width: 35%">LIKES</div>
+</div>
+<!-- 
+<div style="display: flex; height: 100%" class="mainColors">
+  <div
+    style="
+      width: 65%;
+      display: flex;
+      align-items: center;
+      background: black;
+      height: 600px;
+    "
+  >
+    <img
+      alt="Picture"
+      src="{{ post.imgUrl }}"
+      style="width: 100%; max-height: 600px"
+    />
+    <div class="container-fluid">
+      <div style="width: 100%">
+        <ngb-carousel *ngIf="imagesUrl">
+          <ng-template ngbSlide *ngFor="let img of imagesUrl; let i = index">
+            <div class="wrapper">
+              <img [src]="img" alt="Random images" />
+            </div>
+            <div class="carousel-caption">
+              <h3>First Slide</h3>
+              <p>Angular 10 Carousel Example</p>
+            </div>
+          </ng-template>
+        </ngb-carousel>
+      </div>
+    </div>
+    <div style="width: 35%">Likes</div>
+  </div>
+
+  <div style="height: 600px">
+    <div class="mainBorder" style="display: flex; color: white">
+      <div style="display: flex; justify-content: center">
+        <div>
+          <div
+            class="imageTransition"
+            style="border: 1px solid grey; border-radius: 2%; width: 100%"
+          >
+            <img
+              alt="Picture"
+              style="
+                width: 100%;
+                max-height: 750px;
+                border-radius: 2%;
+                cursor: pointer;
+              "
+              src="{{ post.imgUrl }}"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div style="width: 20%">
+        <div style="display: flex; align-items: center">
+          <div
+            class="ind-post-data"
+            style="border: 1px solid #151414; border-radius: 50%"
+          >
+            <img class="profilePic" alt="Avatar" src="{{ post.imgUrl }}" />
+          </div>
+          <div class="ind-post-data">{{ post.name }}</div>
+          <div class="ind-post-data" class="userName">@{{ post.username }}</div>
+          <div class="ind-post-data">.</div>
+          <div class="ind-post-data" style="color: darkgray">
+            {{ post.time }}
+          </div>
+        </div>
+        <div style="margin-top: 10px; margin-left: 50px">
+          <div style="margin-right: 50px">
+            {{ post.caption }}
+          </div>
+        </div>
+
+        <div style="display: flex; width: 100%; margin-top: 10px">
+          <div class="post-actions" (click)="likePicture()">
+            <fa-icon
+              class="post-actions-icons"
+              style="font-size: 21px"
+              [ngStyle]="{ color: post.liked == true ? '#ff0044' : '' }"
+              [icon]="faHeart"
+              transform="grow-5"
+            ></fa-icon>
+          </div>
+
+          <div class="post-actions">
+            <mat-icon class="post-actions-icons"> comment</mat-icon>
+          </div>
+          <div class="post-actions">
+            <mat-icon class="post-actions-icons">send</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

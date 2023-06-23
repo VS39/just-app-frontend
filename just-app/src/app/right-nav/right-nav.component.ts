@@ -7,24 +7,26 @@ import { Component } from '@angular/core';
 })
 export class RightNavComponent {
 
+  imgUrl="./assets/img/ana.jpeg";
+
   happeningData:any[]=[
     {
-      "topic":"sports",
+      "topic":"Sports",
       "trending":"bat-ka-grip",
       "noOfTweets":"12k"
     },
     {
-      "topic":"politics",
+      "topic":"Politics",
       "trending":"modi-rahul",
       "noOfTweets":"56k"
     },
     {
-      "topic":"movie",
+      "topic":"Movie",
       "trending":"aadipurush",
       "noOfTweets":"234k"
     },
     {
-      "topic":"fashion",
+      "topic":"Fashion",
       "trending":"vans",
       "noOfTweets":"24k"
     }

@@ -1,71 +1,70 @@
-<div>
-  <div style="display: flex; justify-content: center; margin-top: 30px;">
-    <input
-      placeholder="Search"
-      style="
-        height: 30px;
-        width: 70%;
-        border-radius: 9px;
-        border: 1px solid grey;
-        padding-left: 10px;
-      "
-    />
-  </div>
-  <div class="right-nav-happening">
-    <div>
-      <div
+<div
+  style="
+    overflow: scroll;
+    height: 100vh;
+    overflow-x: hidden;
+    padding-bottom: 1%;
+  "
+>
+  <div class="mainPadding">
+    <div class="mainBorder">
+      <input
+        placeholder="Search"
         style="
-          margin-top: 10px;
-          margin-bottom: 10px;
-          border-bottom: 1px solid grey;
-        "
-      >
-        <div style="margin-left: 10px; margin-bottom: 10px;">
-          what's happening
-        </div>
-      </div>
-      <div
-        *ngFor="let happen of happeningData"
-        style="
-          padding-bottom: 10px;
+          height: 30px;
+          width: 90%;
+          border-radius: 9px;
+          border: 1px solid grey;
           padding-left: 10px;
-          border-bottom: 1px solid grey;
+          margin: 20px 0 20px 10px;
         "
-      >
-        <div>{{ happen.topic }}</div>
-        <div>{{ happen.trending }}</div>
-        <div>{{ happen.noOfTweets }}</div>
+      />
+    </div>
+    <div style="padding-top: 8%">
+      <div class="mainBorder" style="padding: 0">
+        <div style="border-bottom: 1px solid #0a3754">
+          <div style="margin: 6%">What's happening</div>
+        </div>
+        <div
+          *ngFor="let happen of happeningData"
+          style="padding: 6%; border-bottom: 1px solid #0a3754"
+        >
+          <div>{{ happen.topic }}</div>
+          <div style="color: darkgoldenrod">{{ happen.trending }}</div>
+          <div style="color: darkgrey">{{ happen.noOfTweets }}</div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="who-to-follow">
-    <div>
-      <div
-        style="
-          margin-top: 10px;
-          margin-bottom: 10px;
-          border-bottom: 1px solid grey;
-        "
-      >
-        <div style="margin-left: 10px; margin-bottom: 10px;">
-          who to follow
+
+    <div style="padding-top: 8%">
+      <div class="mainBorder" style="padding: 0">
+        <div style="border-bottom: 1px solid #0a3754">
+          <div style="margin: 6%">Who to follow</div>
         </div>
-      </div>
-      <div
-        style="
-          padding-bottom: 10px;
-          padding-left: 10px;
-          border-bottom: 1px solid grey;
-        "
-      >
-        <div class="person">
-          <div style="display: flex;">
-            <div style="width: 20%;">icon</div>
-            <div style="width: 60%;">
-              <div>name</div>
-              <div>username</div>
+        <div style="padding: 6%; border-bottom: 1px solid #0a3754">
+          <div style="display: flex">
+            <div style="width: 20%">
+              <div
+                class="ind-post-data"
+                style="
+                  border: 1px solid #151414;
+                  border-radius: 50%;
+                  margin-right: 2%;
+                "
+              >
+                <img
+                class="profilePic" alt="Avatar"
+                  src="{{ imgUrl }}"
+                />
+              </div>
             </div>
-            <div style="width: 20%;">follow</div>
+            <div style="width: 60%">
+              <div>Ana De Armas</div>
+              <div class="userName">@anadearmas</div>
+            </div>
+            <div style="width: 24%">
+              <div class="mainButton">Follow</div>
+            </div>
           </div>
         </div>
       </div>
