@@ -1,36 +1,16 @@
 .ind-post-data {
   margin-right: 8px;
 }
-.post-actions {
-  margin-right: 8px;
-  width: 20%;
-  justify-content: center;
-  display: flex;
-}
-.post {
-  /* border-bottom: 1px solid grey;
-  padding-bottom: 10px; */
-}
 
-.test {
-  transition: width 1s, height 1s, transform 0.5s;
-}
-
-.test:hover {
-  -webkit-transform: scale(1.2);
-  -ms-transform: scale(1.2);
-  transform: scale(1.03);
-  
-}
-
-.test {
+.imageTransition {
     /* background: red; */
-    transition: width 2s, height 2s, transform 0.5s;
+    transition: width 1s, height 1s, transform 0.5s;
+    transition-delay: 0.2s;
 }
 
-.test:hover {
+.imageTransition:hover {
 
     -webkit-transform: scale(1.2);
     -ms-transform: scale(1.2);
-    transform: scale(1.3);
+    transform: scale(1.03);
 }

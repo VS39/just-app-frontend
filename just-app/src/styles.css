@@ -1,39 +1,150 @@
-
-
 /* You can add global styles to this file, and also import other style files */
+
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
 body {
-    display: block;
-    margin: 0px;
+  display: block;
+  margin: 0px;
 }
 
 * {
-    font-family: Raleway /* Replace with your custom font */, sans-serif !important; 
-    /* Add !important to overwrite all elements */
+  font-family: Raleway /* Replace with your custom font */, sans-serif !important;
+  /* Add !important to overwrite all elements */
 
-    color:white;
-  }
+  /* color: white; */
+}
 
-  /* * {
-    font-size:20px;
-  } */
+.material-icons {
+  font-family: "Material Icons" !important;
+  font-size: 21px;
+}
 
-  
+* {
+  font-size: 16px;
+}
 
 /* body {	 */
-	/* background: linear-gradient(141deg, #010311 0%, #1b5a63 51%, #290220 75%); */
-  /* background: linear-gradient(to bottom, #B721FF, #2AF598, #fec051, #FEE140, #FA709A );
+/* background: linear-gradient(141deg, #010311 0%, #1b5a63 51%, #290220 75%); */
+/* background: linear-gradient(to bottom, #B721FF, #2AF598, #fec051, #FEE140, #FA709A );
 	background-size: 100%;
 	background-repeat: no-repeat; */
-	
+
 /* } */
+
+/* .mainPadding { */
+/* padding-left: 14%;
+  padding-right: 14%; */
+/* padding-top: 15px; */
+/* } */
+
+.mainBorder {
+  border: 1px solid #0a3754;
+  background: #001828;
+  border-radius: 6px;
+  padding: 3%;
+}
+
+.mainButton {
+  border: 1px solid grey;
+  align-items: center;
+  display: flex;
+  padding: 10%;
+  border-radius: 10px;
+  background: #589c9f;
+  cursor: pointer;
+}
+
 ::-webkit-scrollbar {
-    width: 0px;
-    overflow-y: scroll;
-    background: grey;
-    box-shadow: inset 0 0 4px #707070;
+  width: 0px;
+  height: 4px;
+  overflow-y: scroll;
+  background: grey;
+  box-shadow: inset 0 0 4px #707070;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: blue;
-    border-radius: 10px;
+  background: grey;
+  border-radius: 10px;
+}
+
+.matIconManual {
+  margin-right: 3%;
+}
+
+.mainColors {
+  background: #010f18;
+  color: white;
+}
+
+.navBarBorder {
+  border: 1px solid #0a3754;
+  background: #001828;
+  border-radius: 0px 0px 6px 6px;
+}
+
+.profilePic {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  max-width: 100%;
+  border: 1px solid #1e3664;
+  cursor: pointer;
+}
+
+.userName {
+  color: cadetblue;
+}
+
+.post-actions {
+  margin-right: 8px;
+  width: 20%;
+  justify-content: center;
+  display: flex;
+  cursor: pointer;
+}
+
+.post-actions {
+  margin-right: 8px;
+  width: 33.3%;
+  justify-content: center;
+  display: flex;
+  cursor: pointer;
+}
+
+.post-actions-icons:hover {
+  color: #d5d5d5;
+}
+
+ngb-carousel .wrapper {
+  position: relative;
+  height: 0;
+  padding-top: 55%; /* Keep ratio for 900x500 images */
+}
+
+ngb-carousel .wrapper > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.visually-hidden {
+  display: none !important;
+}
+
+.carousel-control-next {
+  border: none !important;
+  background-color: rgb(255 255 255 / 0%) !important;
+}
+
+.carousel-control-prev {
+  border: none !important;
+  background-color: rgb(255 255 255 / 0%) !important;
+}
+
+.carousel-indicators{
+  margin-bottom: 10px !important;
+  opacity: 0.4 !important;
 }
