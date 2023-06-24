@@ -1,13 +1,25 @@
-<div style="display: flex; background: #010f18">
-  <div style="width: 25%">
-    <app-left-nav></app-left-nav>
+<div class="mainColors">
+  <div style="padding-bottom: 2%">
+    <div>
+      <mat-toolbar class="mainColors navBarBorder">
+        <div style="width: 80%">My Application</div>
+        <div style="width: 20%; justify-content: end; display: flex">
+          <img src="./assets/img/city.jpg" alt="Avatar" class="profilePic" />
+        </div>
+      </mat-toolbar>
+    </div>
   </div>
+  <div style="display: flex">
+    <div style="width: 25%; margin-left: 5%">
+      <app-left-nav></app-left-nav>
+    </div>
 
-  <div style="width: 50%">
-    <app-content-area></app-content-area>
-  </div>
+    <div style="width: 50%; margin-left: 2%; margin-right: 2%">
+      <app-content-area></app-content-area>
+    </div>
 
-  <div style="width: 25%">
-    <app-right-nav></app-right-nav>
+    <div style="width: 25%; margin-right: 5%">
+      <app-right-nav></app-right-nav>
+    </div>
   </div>
 </div>
