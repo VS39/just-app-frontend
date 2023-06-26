@@ -1,0 +1,169 @@
+<div
+  *ngIf="userData.length == 0"
+  style="padding: 10%; font-weight: bold; text-align: center"
+>
+  <div>No posts yet.</div>
+</div>
+<div *ngIf="userData.length != 0">
+  <div style="padding: 5px; text-align: end">
+    <div>
+      <mat-icon
+        [ngStyle]="{
+          color: singlePost == false ? 'white' : ''
+        }"
+        (click)="changeGrid()"
+        class="gridIcon"
+        >view_compact</mat-icon
+      >
+    </div>
+  </div>
+  <div id="container">
+    <div
+      *ngFor="let element of userData"
+      class="box"
+      [ngStyle]="
+        singlePost == false
+          ? {
+              width: '50%',
+              border: 'none'
+            }
+          : {}
+      "
+    >
+      <div *ngIf = "singlePost == true" style="text-align: initial; margin: 10px; margin-bottom: 10px;">
+        <div style="display: flex">
+          <div style="margin-right: 10px">
+            <div
+              class="ind-post-data"
+              style="
+                border: 1px solid #151414;
+                border-radius: 50%;
+                margin-right: 2%;
+              "
+            >
+              <img class="profilePic" alt="Avatar" src="{{ element.imgUrl }}" />
+            </div>
+          </div>
+          <div>
+            <div class="name">Vikrant Gautam</div>
+            <div class="userName">@vikrantgautam</div>
+          </div>
+        </div>
+        <div style="margin: 10px">
+          <div>{{ element.caption }}</div>
+        </div>
+      </div>
+
+      <img (click)="expandImage(element)"
+        [ngStyle]="singlePost == false ? { height: '100%' } : {}"
+        src="{{ element.imgUrl }}"
+        alt="Users Pics"
+        class="allPosts"
+      />
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          margin-top: 10px;
+          margin-bottom: 10px;
+          width: 100%;
+        "
+      >
+        <div *ngIf = "singlePost == true" style="display: flex; width: 100%">
+          <div class="post-actions" (click)="likePicture(element)">
+            <fa-icon
+              class="post-actions-icons"
+              style="font-size: 21px"
+              [ngStyle]="{ color: element.liked == true ? '#ff0044' : '' }"
+              [icon]="faHeart"
+              transform="grow-2"
+            ></fa-icon>
+            <div class="likesText" style="margin-left: 8px">
+              {{ element.likes }}
+            </div>
+          </div>
+          <div class="post-actions">
+            <mat-icon class="post-actions-icons likeIcon"> comment</mat-icon>
+            <div class="likesText">{{ element.comments }}</div>
+          </div>
+          <div class="post-actions">
+            <mat-icon class="post-actions-icons likeIcon">send</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 
+<div
+  *ngIf="userData.length == 0"
+  style="padding: 10%; font-weight: bold; text-align: center"
+>
+  <div>No posts yet.</div>
+</div>
+<div *ngIf="userData.length != 0">
+  <div style="padding: 5px; text-align: end">
+    <div>
+      <mat-icon
+        [ngStyle]="{
+          color: singlePost == false ? 'white' : ''
+        }"
+        (click)="changeGrid()"
+        class="gridIcon"
+        >view_compact</mat-icon
+      >
+    </div>
+  </div>
+  <div id="container">
+    <div
+      *ngFor="let element of userData"
+      class="box"
+      [ngStyle]="{
+        width: singlePost == false ? '49%' : ''
+      }"
+      [ngStyle]="
+        singlePost == false
+          ? {
+              width: '49%',
+              'border-radius': '10px',
+              border: '2px solid #0a3754',
+              'margin-bottom': '10px',
+              'padding-bottom': '12px'
+            }
+          : {}
+      "
+    >
+      <img
+        [ngStyle]="singlePost == false ? { height: '95%' } : {}"
+        src="{{ element.imgUrl }}"
+        alt="Users Pics"
+        class="allPosts"
+      />
+
+      <div style="display: flex; justify-content: center; width: 100%; height:40px;">
+        <div style="display: flex; width: 100%; margin-top: 10px">
+          <div class="post-actions" (click)="likePicture(element)">
+            <fa-icon
+              class="post-actions-icons"
+              style="font-size: 21px"
+              [ngStyle]="{ color: element.liked == true ? '#ff0044' : '' }"
+              [icon]="faHeart"
+              transform="grow-2"
+            ></fa-icon>
+            <div class="likesText" style="margin-left: 8px">
+              {{ element.likes }}
+            </div>
+          </div>
+          <div class="post-actions">
+            <mat-icon class="post-actions-icons likeIcon"> comment</mat-icon>
+            <div class="likesText">{{ element.comments }}</div>
+          </div>
+          <div class="post-actions">
+            <mat-icon class="post-actions-icons likeIcon">send</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

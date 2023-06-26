@@ -4,42 +4,40 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  username: any = '';
+  password: any = '';
+  showRedSpan: boolean = false;
 
-  username : any = "";
-  password : any = "";
-  showRedSpan : boolean = false;
+  constructor(private router: Router) {}
 
-  constructor(private router:Router){
-  }
-
-  login(){
+  login() {
     console.log(this.username);
     console.log(this.password);
-    if(this.username == "" || this.password == ""){
+    if (this.username == '' || this.password == '') {
       this.showRedSpan = true;
-    }else{
+    } else {
       this.showRedSpan = false;
-        this.router.navigate(['home'])
+      this.router.navigate(['home']);
     }
   }
 
-  signup(){
-        this.router.navigate(['signup'])
+  signup() {
+    this.router.navigate(['signup']);
   }
 
-  backToHome(){
-    this.username = "";
-    this.password = "";
+  backToHome() {
+    this.username = '';
+    this.password = '';
   }
 
-  usernameClick(user:any){
+  usernameClick(user: any) {
     this.username = user;
-  } 
-  
-  passwordClick(pass:any){
+  }
+
+  passwordClick(pass: any) {
     this.password = pass;
   }
 }

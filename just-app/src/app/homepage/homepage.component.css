@@ -1,0 +1,12 @@
+.imageTransition {
+    /* background: red; */
+    transition: width 1s, height 1s, transform 0.5s;
+    transition-delay: 0.2s;
+}
+
+.imageTransition:hover {
+
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.03);
+}

@@ -1,0 +1,23 @@
+<div style="display: flex" class="mainColors">
+  <div style="width: 100%">
+    <div
+      class="imageTransition"
+      style="
+        justify-content: center;
+        display: flex;
+        width: 100%;
+        background: black;
+        position: relative;
+      "
+    >
+      <div style="right: 3px; top: 3px; position: absolute">
+        <mat-icon (click)="close()">close</mat-icon>
+      </div>
+      <img
+        alt="Picture"
+        style="max-width: 700px; max-height: 700px"
+        src="{{ post }}"
+      />
+    </div>
+  </div>
+</div>

@@ -1,44 +1,27 @@
 <div class="mainPadding">
   <div class="mainBorder">
     <div>
-      <div class="button2">
-        <div class="new" style="display: flex; align-items: center">
+      <div
+        *ngFor="let element of listData"
+        class="button2"
+        (click)="setRoute(element)"
+      >
+        <div
+          class="new"
+          style="display: flex; align-items: center"
+          [ngStyle]="
+            element.clicked == true
+              ? {
+                  'font-weight': 'bold',
+                  color: 'bisque'
+                }
+              : {}
+          "
+        >
           <div class="matIconManual">
-            <mat-icon>home</mat-icon>
+            <mat-icon>{{ element.iconName }}</mat-icon>
           </div>
-          <div>Home</div>
-        </div>
-      </div>
-      <div class="button2">
-        <div class="new" style="display: flex; align-items: center">
-          <div class="matIconManual">
-            <mat-icon>search</mat-icon>
-          </div>
-          <div>Search</div>
-        </div>
-      </div>
-      <div class="button2">
-        <div class="new" style="display: flex; align-items: center">
-          <div class="matIconManual">
-            <mat-icon>notifications</mat-icon>
-          </div>
-          <div>Notifications</div>
-        </div>
-      </div>
-      <div class="button2">
-        <div class="new" style="display: flex; align-items: center">
-          <div class="matIconManual">
-            <mat-icon>chat_bubble_outline</mat-icon>
-          </div>
-          <div>Messages</div>
-        </div>
-      </div>
-      <div class="button2">
-        <div class="new" style="display: flex; align-items: center">
-          <div class="matIconManual">
-            <mat-icon>settings</mat-icon>
-          </div>
-          <div>Settings</div>
+          <div>{{ element.name }}</div>
         </div>
       </div>
     </div>
