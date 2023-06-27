@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { ProfileImageExpandComponent } from '../pop-ups/profile-image-expand/profile-image-expand.component';
+import { AddPostComponent } from '../pop-ups/add-post/add-post.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -128,8 +129,20 @@ export class UserProfileComponent {
   expandImage(element: any) {
     const dialogRef = this.dialog.open(ProfileImageExpandComponent, {
       data: element,
-      width: '1000px',
-      // height: '700px',
+      // width: '1000px',
+      // height: '90%',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Result: ${result}`);
+    });
+  }
+
+  addPost() {
+    const dialogRef = this.dialog.open(AddPostComponent, {
+      // data: element,
+      width: '600px',
+      // height: '90%',
     });
 
     dialogRef.afterClosed().subscribe((result) => {

@@ -1,5 +1,6 @@
-<div style="display: flex" class="mainColors">
-  <div style="width: 100%">
+<div class="mainColorsPopup">
+  <div>
+    <!-- style="width: 1000px" -->
     <div
       class="imageTransition"
       style="
@@ -10,14 +11,17 @@
         position: relative;
       "
     >
-      <div style="right: 3px; top: 3px; position: absolute">
+      <!-- <div style="right: 3px; top: 3px; position: absolute">
         <mat-icon (click)="close()">close</mat-icon>
+      </div> -->
+      <div class="classIcon">
+        <mat-icon
+          style="padding-top: 1.6px; padding-left: 0.4px"
+          (click)="close()"
+          >close</mat-icon
+        >
       </div>
-      <img
-        alt="Picture"
-        style="max-width: 700px; max-height: 700px"
-        src="{{ post }}"
-      />
+      <img alt="Picture" style="max-height: 90vh" src="{{ post }}" />
     </div>
   </div>
 </div>

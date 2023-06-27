@@ -1,5 +1,5 @@
-<div style="display: flex" class="mainColors">
-  <div style="width: 65%">
+<div style="display: flex ;max-height: 95vh; overflow: hidden;" class="mainColorsPopup">
+  <div style="width: 65%;overflow: auto; ">
     <!-- <div style="width: 59%; height: 56%"> -->
     <div
       class="imageTransition"
@@ -28,7 +28,7 @@
         <mat-icon class="icon buttonArrows">keyboard_arrow_right</mat-icon>
       </div>
 
-      <div class="roundButton" style="bottom: 10px">
+      <div class="roundButton" style="bottom: 20px">
         <mat-icon
           *ngFor="let img of imagesUrl; let i = index"
           (click)="roundArrow(i)"
@@ -40,7 +40,7 @@
       <!-- <div class="imageTransition" style="border: 1px solid grey; border-radius: 2%"> -->
       <img
         alt="Picture"
-        style="max-width: 700px; max-height: 700px"
+        style="max-width: 700px; max-height: 700px; min-width:400px; min-height:400px"
         src="{{ img }}"
       />
     </div>
@@ -93,8 +93,15 @@
         </div>
       </div>
     </div>
-    <div style="width: 10%; justify-content: end; display: flex">
+    <!-- <div style="width: 10%; justify-content: end; display: flex">
       <mat-icon (click)="close()">close</mat-icon>
+    </div> -->
+    <div class="classIcon">
+      <mat-icon
+        style="padding-top: 1.6px; padding-left: 0.4px"
+        (click)="close()"
+        >close</mat-icon
+      >
     </div>
   </div>
 </div>

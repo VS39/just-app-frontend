@@ -34,7 +34,7 @@
           <!-- <div style="width: 59%; height: 56%"> -->
           <div
             class="imageTransition"
-            style="border: 1px solid grey; border-radius: 2%; width: 100%"
+            style="border: 1px solid grey; border-radius: 2%; min-width: 420px;"
           >
             <!-- <div class="imageTransition" style="border: 1px solid grey; border-radius: 2%"> -->
             <img
@@ -44,6 +44,7 @@
                 max-height: 750px;
                 border-radius: 10px;
                 cursor: pointer;
+                object-fit: cover;
               "
               src="{{ post.imgUrl }}"
               (click)="onPostClick(post)"

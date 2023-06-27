@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { AddPostComponent } from '../pop-ups/add-post/add-post.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-left-nav',
@@ -8,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LeftNavComponent {
   @Output() openRoute: any = new EventEmitter<any>();
+
   listData: any = [
     {
       name: 'Home',
@@ -41,16 +44,18 @@ export class LeftNavComponent {
     },
   ];
 
-  constructor(private router:Router){
+  constructor(
+    private router: Router,
+    public dialog: MatDialog
+  ) {
     console.log(this.router.url);
-     this.listData.forEach((list: any) => {
-      if (this.router.url == '/'+list.route) {
+    this.listData.forEach((list: any) => {
+      if (this.router.url == '/' + list.route) {
         list.clicked = true;
       } else {
         list.clicked = false;
       }
     });
-
   }
 
   setRoute(element: any) {
@@ -63,5 +68,17 @@ export class LeftNavComponent {
     });
     console.log(this.listData);
     this.openRoute.emit(element.route);
+  }
+
+  addPost() {
+    const dialogRef = this.dialog.open(AddPostComponent, {
+      // data: element,
+      width: '600px',
+      // height: '90%',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Result: ${result}`);
+    });
   }
 }

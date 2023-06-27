@@ -26,6 +26,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ShowFollowersComponent } from './show-followers/show-followers.component';
 import { ShowProfilePostsComponent } from './show-profile-posts/show-profile-posts.component';
 import { ProfileImageExpandComponent } from './pop-ups/profile-image-expand/profile-image-expand.component';
+import { AddPostComponent } from './pop-ups/add-post/add-post.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { ProfileImageExpandComponent } from './pop-ups/profile-image-expand/prof
     ShowFollowersComponent,
     ShowProfilePostsComponent,
     ProfileImageExpandComponent,
+    AddPostComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,8 @@ import { ProfileImageExpandComponent } from './pop-ups/profile-image-expand/prof
     MatCardModule,
     FontAwesomeModule,
     MatDialogModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],
