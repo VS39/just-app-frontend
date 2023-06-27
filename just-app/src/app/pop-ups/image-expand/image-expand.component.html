@@ -1,23 +1,109 @@
-<div style="display: flex" class="mainColors">
-  <div style="width: 65%">
+<div style="display: flex ;max-height: 95vh; overflow: hidden;" class="mainColorsPopup">
+  <div style="width: 65%;overflow: auto; ">
     <!-- <div style="width: 59%; height: 56%"> -->
     <div
       class="imageTransition"
-      style="justify-content: center; display: flex; width: 100%;background: black;"
+      style="
+        justify-content: center;
+        display: flex;
+        width: 100%;
+        background: black;
+        position: relative;
+      "
     >
+      <div
+        *ngIf="postIndex != 0"
+        (click)="leftArrow()"
+        class="arrowButton"
+        style="left: 10px"
+      >
+        <mat-icon class="icon buttonArrows">keyboard_arrow_left</mat-icon>
+      </div>
+      <div
+        *ngIf="postIndex != imagesUrl.length - 1"
+        (click)="rightArrow()"
+        class="arrowButton"
+        style="right: 10px"
+      >
+        <mat-icon class="icon buttonArrows">keyboard_arrow_right</mat-icon>
+      </div>
+
+      <div class="roundButton" style="bottom: 20px">
+        <mat-icon
+          *ngFor="let img of imagesUrl; let i = index"
+          (click)="roundArrow(i)"
+          class="icon buttonArrows"
+          style="height: 10px; margin-right: 2px; width: 10px"
+          >keyboard_arrow_right</mat-icon
+        >
+      </div>
       <!-- <div class="imageTransition" style="border: 1px solid grey; border-radius: 2%"> -->
       <img
         alt="Picture"
-        style="
-          max-width: 700px;
-          max-height: 700px;
-        "
-        src="{{ post.imgUrl }}"
+        style="max-width: 700px; max-height: 700px; min-width:400px; min-height:400px"
+        src="{{ img }}"
       />
     </div>
   </div>
 
-  <div style="width: 35%">LIKES</div>
+  <div style="width: 35%; display: flex">
+    <div style="padding: 3%; width: 90%;">
+      <div style="display: flex; align-items: center">
+        <div
+          class="ind-post-data"
+          style="border: 1px solid #151414; border-radius: 50%"
+        >
+          <img class="profilePic" alt="Avatar" src="{{ post.imgUrl }}" />
+        </div>
+        <div class="ind-post-data">{{ post.name }}</div>
+        <div class="ind-post-data" class="userName">@{{ post.username }}</div>
+        <div class="ind-post-data">.</div>
+        <div class="ind-post-data" style="color: darkgray">{{ post.time }}</div>
+      </div>
+      <div style="margin-top: 10px">
+        <div>
+          {{ post.caption }}
+        </div>
+      </div>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          margin-top: 20px;
+          width: 100%;
+        "
+      >
+        <div style="display: flex; width: 100%; margin-top: 10px">
+          <div class="post-actions" (click)="likePicture()">
+            <fa-icon
+              class="post-actions-icons"
+              style="font-size: 21px"
+              [ngStyle]="{ color: post.liked == true ? '#ff0044' : '' }"
+              [icon]="faHeart"
+              transform="grow-5"
+            ></fa-icon>
+          </div>
+
+          <div class="post-actions">
+            <mat-icon class="post-actions-icons"> comment</mat-icon>
+          </div>
+          <div class="post-actions">
+            <mat-icon class="post-actions-icons">send</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div style="width: 10%; justify-content: end; display: flex">
+      <mat-icon (click)="close()">close</mat-icon>
+    </div> -->
+    <div class="classIcon">
+      <mat-icon
+        style="padding-top: 1.6px; padding-left: 0.4px"
+        (click)="close()"
+        >close</mat-icon
+      >
+    </div>
+  </div>
 </div>
 <!-- 
 <div style="display: flex; height: 100%" class="mainColors">

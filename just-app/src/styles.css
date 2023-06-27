@@ -45,16 +45,6 @@ body {
   padding: 3%;
 }
 
-.mainButton {
-  border: 1px solid grey;
-  align-items: center;
-  display: flex;
-  padding: 10%;
-  border-radius: 10px;
-  background: #589c9f;
-  cursor: pointer;
-}
-
 ::-webkit-scrollbar {
   width: 0px;
   height: 4px;
@@ -68,6 +58,14 @@ body {
   border-radius: 10px;
 }
 
+mat-icon {
+  cursor: pointer;
+}
+
+.ind-post-data {
+  margin-right: 8px;
+}
+
 .matIconManual {
   margin-right: 3%;
 }
@@ -77,31 +75,15 @@ body {
   color: white;
 }
 
+.mainColorsPopup {
+  background: #001828;
+  color: white;
+}
+
 .navBarBorder {
   border: 1px solid #0a3754;
   background: #001828;
   border-radius: 0px 0px 6px 6px;
-}
-
-.profilePic {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  max-width: 100%;
-  border: 1px solid #1e3664;
-  cursor: pointer;
-}
-
-.userName {
-  color: cadetblue;
-}
-
-.post-actions {
-  margin-right: 8px;
-  width: 20%;
-  justify-content: center;
-  display: flex;
-  cursor: pointer;
 }
 
 .post-actions {
@@ -110,6 +92,7 @@ body {
   justify-content: center;
   display: flex;
   cursor: pointer;
+  align-items: center;
 }
 
 .post-actions-icons:hover {
@@ -144,7 +127,140 @@ ngb-carousel .wrapper > img {
   background-color: rgb(255 255 255 / 0%) !important;
 }
 
-.carousel-indicators{
+.carousel-indicators {
   margin-bottom: 10px !important;
   opacity: 0.4 !important;
+}
+
+.profilePic {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  max-width: 100%;
+  border: 1px solid #1e3664;
+  cursor: pointer;
+  object-fit: cover;
+  object-position: top;
+}
+
+.profilePicUser {
+  width: 135px;
+  height: 135px;
+  border-radius: 50%;
+  max-width: 100%;
+  /* border: 1px solid #1e3664; */
+  cursor: pointer;
+}
+
+.backgoundPic {
+  width: 100%;
+  height: 300px;
+  /* border-radius: 50%; */
+  max-width: 100%;
+  /* border: 1px solid #1e3664; */
+  cursor: pointer;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.userName {
+  color: cadetblue;
+  font-size: 14px;
+}
+
+.bio {
+  color: #e3d3d3;
+  font-size: 14px;
+}
+
+.tabText {
+  font-size: 14px;
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.tabNumbers {
+  font-size: 14px;
+  color: bisque;
+  font-weight: bold;
+}
+
+.mainButton {
+  border: 1px solid #cccccce8;
+  background-color: #8d8d8d;
+  border-radius: 6px;
+  cursor: pointer;
+  justify-content: center;
+  display: flex;
+  font-size: 14px;
+}
+
+.mainButton:hover {
+  background: #7d7d7d9c;
+}
+
+.mainButtonFollowing {
+  border: 1px solid #cccccce8;
+  background-color: rgb(1, 15, 24);
+  border-radius: 6px;
+  cursor: pointer;
+  justify-content: center;
+  display: flex;
+  font-size: 14px;
+}
+
+.mainButtonFollowing:hover {
+  background: #7d7d7d9c;
+}
+
+.mainButtonBackgound {
+  border: 1px solid #9f9c9ccc;
+  background-color: #8d8d8d30;
+  border-radius: 6px;
+  cursor: pointer;
+  justify-content: center;
+  display: flex;
+  font-size: 14px;
+}
+
+.mainButtonBackgound:hover {
+  background: #7d7d7d9c;
+}
+
+.profileTab {
+  cursor: pointer;
+  width: 33%;
+  text-align: center;
+}
+
+.profileTab:hover {
+  border-radius: 10px 10px 0px 0px;
+  background: #8d8d8d30;
+}
+
+.centreBlock {
+  overflow: scroll;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  background: #010f18 !important;
+  color: white !important;
+}
+
+.classIcon {
+  border-radius: 50%;
+  position: absolute;
+  text-align: center;
+  background: black;
+  right: 8px;
+  top: 8px;
+  backdrop-filter: blur(4px);
+  background-color: rgba(15, 20, 25, 0.75);
+}
+.classIcon:hover {
+  background-color: rgb(66 68 70 / 75%);
 }
