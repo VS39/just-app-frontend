@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Spinkit } from 'ng-http-loader';
 
 @Component({
   selector: 'app-root',
@@ -8,16 +8,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'just-app';
+  public spinkit = Spinkit;
 
-  constructor(private router: Router,private route:ActivatedRoute) {
-    // console.log(this.router.url);
-  }
-
-  setRoute(event: any) {
-    this.router.navigate([event]);
-  }
-
-  showProfile() {
-    this.router.navigate(['user']);
-  }
 }
