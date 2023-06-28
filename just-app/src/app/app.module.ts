@@ -19,7 +19,18 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ImageExpandComponent } from './pop-ups/image-expand/image-expand.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { HeaderBarComponent } from './header-bar/header-bar.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ShowFollowersComponent } from './show-followers/show-followers.component';
+import { ShowProfilePostsComponent } from './show-profile-posts/show-profile-posts.component';
+import { ProfileImageExpandComponent } from './pop-ups/profile-image-expand/profile-image-expand.component';
+import { AddPostComponent } from './pop-ups/add-post/add-post.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { NgHttpLoaderModule } from 'ng-http-loader';
 
 @NgModule({
   declarations: [
@@ -31,6 +42,13 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     RightNavComponent,
     SignUpComponent,
     ImageExpandComponent,
+    UserProfileComponent,
+    HeaderBarComponent,
+    PageNotFoundComponent,
+    ShowFollowersComponent,
+    ShowProfilePostsComponent,
+    ProfileImageExpandComponent,
+    AddPostComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +60,12 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     MatCardModule,
     FontAwesomeModule,
     MatDialogModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    NgHttpLoaderModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

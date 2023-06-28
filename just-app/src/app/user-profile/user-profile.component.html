@@ -1,0 +1,117 @@
+<div class="mainColors mainPadding centreBlock">
+  <div style="padding: 0%" class="mainBorder">
+    <div style="padding: 10px; display: flex">
+      <div style="width: 80%; display: flex">
+        <div class="back">
+          <mat-icon (click)="back()" style="padding-left: 2px; padding-top: 1px"
+            >keyboard_backspace</mat-icon
+          >
+        </div>
+        <div style="font-weight: bold; align-items: center; display: flex">
+          Profile
+        </div>
+      </div>
+
+      <div
+        style="
+          width: 20%;
+          align-items: center;
+          display: flex;
+          justify-content: end;
+        "
+      >
+        <mat-icon (click)="addPost()">add_photo_alternate</mat-icon>
+        <!-- <span>Add Post</span> -->
+      </div>
+    </div>
+
+    <div style="position: relative; width: 100%">
+      <div style="position: absolute; left: 10px; bottom: 5px">
+        <img
+          (click)="expandImage(profilePic)"
+          src="{{ profilePic }}"
+          alt="Profile Picture"
+          class="profilePicUser"
+        />
+      </div>
+
+      <div style="position: absolute; right: 10px; bottom: 5px">
+        <div class="mainButtonBackgound">
+          <div style="padding: 3px; font-size: 14px">Edit Profile</div>
+        </div>
+      </div>
+
+      <div>
+        <img
+          (click)="expandImage(backgroundPic)"
+          src="{{ backgroundPic }}"
+          alt="Background Image"
+          class="backgoundPic"
+        />
+      </div>
+    </div>
+    <div
+      style="padding: 10px; border-bottom: 2px solid #0a3754; padding-bottom: 0"
+    >
+      <div class="name">Vikrant Gautam</div>
+      <div class="userName">@vikrantgautam</div>
+      <div style="margin-top: 10px" class="bio">Hi, this is my bio.</div>
+      <div style="display: flex; margin-top: 10px">
+        <div
+          class="profileTab"
+          (click)="onTabClick('post')"
+          [ngStyle]="{
+            'border-bottom': showTab == 'post' ? '2px solid grey' : ''
+          }"
+        >
+          <div style="padding: 8px">
+            <span class="tabText">Posts</span>
+            <span class="tabNumbers">{{ userData.length }}</span>
+          </div>
+        </div>
+        <div
+          class="profileTab"
+          (click)="onTabClick('followers')"
+          [ngStyle]="{
+            'border-bottom': showTab == 'followers' ? '2px solid grey' : ''
+          }"
+        >
+          <div style="padding: 8px">
+            <span class="tabText">Followers</span>
+            <span class="tabNumbers">{{ userData.length }}</span>
+          </div>
+        </div>
+        <div
+          class="profileTab"
+          (click)="onTabClick('following')"
+          [ngStyle]="{
+            'border-bottom': showTab == 'following' ? '2px solid grey' : ''
+          }"
+        >
+          <div style="padding: 8px">
+            <span class="tabText">Following</span>
+            <span class="tabNumbers">{{ userData.length }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="showTab == 'post'">
+      <app-show-profile-posts [userData]="userData"></app-show-profile-posts>
+    </div>
+
+    <div *ngIf="showTab == 'followers'">
+      <app-show-followers
+        [showTab]="showTab"
+        [userData]="userData"
+      ></app-show-followers>
+    </div>
+
+    <div *ngIf="showTab == 'following'">
+      <app-show-followers
+        [showTab]="showTab"
+        [userData]="userData"
+      ></app-show-followers>
+    </div>
+  </div>
+</div>

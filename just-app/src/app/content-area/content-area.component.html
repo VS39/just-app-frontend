@@ -1,76 +1,33 @@
-<div
-  class="mainPadding"
-  style="overflow: scroll; height: 100vh; overflow-x: hidden"
->
-  <div>
-    <div class="mainBorder">What's Happening</div>
+<div class="mainColors">
+  <div style="padding-bottom: 2%">
+    <div>
+      <mat-toolbar class="mainColors navBarBorder">
+        <div style="width: 80%; color: white">My Application</div>
+        <div style="width: 20%; justify-content: end; display: flex">
+          <img
+            src="./assets/img/city.jpg"
+            alt="Avatar"
+            class="profilePic"
+            (click)="showProfile()"
+          />
+        </div>
+      </mat-toolbar>
+    </div>
   </div>
 
-  <div *ngFor="let post of postdata" style="padding-top: 3%">
-    <div class="mainBorder">
-      <div style="display: flex; align-items: center">
-        <div
-          class="ind-post-data"
-          style="border: 1px solid #151414; border-radius: 50%"
-        >
-          <img class="profilePic" alt="Avatar" src="{{ post.imgUrl }}" />
-        </div>
-        <div class="ind-post-data">{{ post.name }}</div>
-        <div class="ind-post-data" class="userName">@{{ post.username }}</div>
-        <div class="ind-post-data">.</div>
-        <div class="ind-post-data" style="color: darkgray">{{ post.time }}</div>
-      </div>
-      <div style="margin-top: 10px; margin-left: 50px">
-        <div style="margin-right: 50px">
-          {{ post.caption }}
-        </div>
-      </div>
-      <div
-        style="
-          display: flex;
-          justify-content: center;
-          margin-top: 20px;
-          width: 100%;
-        "
-      >
-        <div>
-          <!-- <div style="width: 59%; height: 56%"> -->
-          <div
-            class="imageTransition"
-            style="border: 1px solid grey; border-radius: 2%; width: 100%"
-          >
-            <!-- <div class="imageTransition" style="border: 1px solid grey; border-radius: 2%"> -->
-            <img
-              alt="Picture"
-              style="
-                width: 100%;
-                max-height: 750px;
-                border-radius: 2%;
-                cursor: pointer;
-              "
-              src="{{ post.imgUrl }}" (click)="onPostClick(post)"
-            />
-          </div>
-          <div style="display: flex; width: 100%; margin-top: 10px">
-            <div class="post-actions" (click)="likePicture(post)">
-              <fa-icon
-                class="post-actions-icons"
-                style="font-size: 21px"
-                [ngStyle]="{ color: post.liked == true ? '#ff0044' : '' }"
-                [icon]="faHeart"
-                transform="grow-5"
-              ></fa-icon>
-            </div>
+  <div style="display: flex">
+    <div style="width: 25%; margin-left: 5%">
+      <app-left-nav (openRoute)="setRoute($event)"></app-left-nav>
+    </div>
 
-            <div class="post-actions">
-              <mat-icon class="post-actions-icons"> comment</mat-icon>
-            </div>
-            <div class="post-actions">
-              <mat-icon class="post-actions-icons">send</mat-icon>
-            </div>
-          </div>
-        </div>
+    <div style="width: 50%; margin-left: 2%; margin-right: 2%">
+      <div>
+        <router-outlet></router-outlet>
       </div>
+    </div>
+
+    <div style="width: 25%; margin-right: 5%">
+      <app-right-nav></app-right-nav>
     </div>
   </div>
 </div>
