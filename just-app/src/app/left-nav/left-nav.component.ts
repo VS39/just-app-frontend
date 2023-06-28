@@ -48,7 +48,6 @@ export class LeftNavComponent {
     private router: Router,
     public dialog: MatDialog
   ) {
-    console.log(this.router.url);
     this.listData.forEach((list: any) => {
       if (this.router.url == '/' + list.route) {
         list.clicked = true;
@@ -66,7 +65,6 @@ export class LeftNavComponent {
         list.clicked = false;
       }
     });
-    console.log(this.listData);
     this.openRoute.emit(element.route);
   }
 

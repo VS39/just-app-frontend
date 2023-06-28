@@ -1,5 +1,5 @@
-<div style="justify-content: center; display: flex;">
-  <div style="display: block;">
+<div style="justify-content: center; display: flex">
+  <div style="display: block">
     <div
       style="
         text-align: center;
@@ -9,25 +9,106 @@
         border-radius: 5px;
       "
     >
-      <div style="margin-bottom: 50px; margin-top: 75px;">
-        Vartalaap
-      </div>
-      <div style="margin-bottom: 30px;">
+      <div style="margin-bottom: 50px; margin-top: 75px">Vartalaap</div>
+      <div style="margin-bottom: 30px">
         Sign up to see photos and videos
         <br />
         from your friends.
       </div>
-      <div class="Username">
-        <input placeholder="Mobile Number or Email" class="input" />
-      </div>
-      <div>
-        <input placeholder="Full Name" class="input" />
-      </div>
-      <div>
-        <input placeholder="Username" class="input" />
-      </div>
-      <div>
-        <input placeholder="Password" class="input" />
+      <div [formGroup]="signupForm">
+        <div class="box">
+          <input
+            [ngClass]="{
+              'input-error':
+                (submitted && signupForm.controls.Email.status == 'INVALID') ||
+                (signupForm.controls.Email.touched &&
+                  signupForm.controls.Email.status == 'INVALID')
+            }"
+            placeholder="Mobile Number or Email"
+            class="input"
+            formControlName="Email"
+          />
+          <div>
+            <mat-error
+              *ngIf="
+                (submitted && signupForm.controls.Email.status == 'INVALID') ||
+                (signupForm.controls.Email.touched &&
+                  signupForm.controls.Email.status == 'INVALID')
+              "
+              >{{ getEmailErrorMessage() }}</mat-error
+            >
+          </div>
+        </div>
+        <div class="box">
+          <input
+            [ngClass]="{
+              'input-error':
+                (submitted && signupForm.controls.Name.status == 'INVALID') ||
+                (signupForm.controls.Name.touched &&
+                  signupForm.controls.Name.status == 'INVALID')
+            }"
+            placeholder="Name"
+            class="input"
+            formControlName="Name"
+          />
+          <div>
+            <mat-error
+              *ngIf="
+                (submitted && signupForm.controls.Name.status == 'INVALID') ||
+                (signupForm.controls.Name.touched &&
+                  signupForm.controls.Name.status == 'INVALID')
+              "
+              >Please enter name.</mat-error
+            >
+          </div>
+        </div>
+        <div class="box">
+          <input
+            [ngClass]="{
+              'input-error':
+                (submitted && signupForm.controls.Username.status == 'INVALID') ||
+                (signupForm.controls.Username.touched &&
+                  signupForm.controls.Username.status == 'INVALID')
+            }"
+            placeholder="Username"
+            class="input"
+            formControlName="Username"
+          />
+
+          <div>
+            <mat-error
+              *ngIf="
+                (submitted && signupForm.controls.Username.status == 'INVALID') ||
+                (signupForm.controls.Username.touched &&
+                  signupForm.controls.Username.status == 'INVALID')
+              "
+              >Please enter username.</mat-error
+            >
+          </div>
+        </div>
+        <div class="box">
+          <input
+            [ngClass]="{
+              'input-error':
+                (submitted && signupForm.controls.Password.status == 'INVALID') ||
+                (signupForm.controls.Password.touched &&
+                  signupForm.controls.Password.status == 'INVALID')
+            }"
+            placeholder="Password"
+            class="input"
+            formControlName="Password"
+          />
+          <div>
+            <mat-error
+              *ngIf="
+                (submitted && signupForm.controls.Password.status == 'INVALID') ||
+                (signupForm.controls.Password.touched &&
+                  signupForm.controls.Password.status == 'INVALID')
+              "
+              >Please enter password.</mat-error
+            >
+          </div>
+        </div>
       </div>
 
       <div
@@ -58,10 +139,10 @@
           Sign up
         </div>
       </div>
-      <div style="padding-bottom: 10px;">
-        <span style="color: red;">Please enter username/password</span>
-      </div>
-      <div style="display: flex; justify-content: center; align-items: center;">
+      <!-- <div style="padding-bottom: 10px">
+        <span style="color: red">Please enter username/password</span>
+      </div> -->
+      <div style="display: flex; justify-content: center; align-items: center">
         <div
           style="
             border-bottom: 1px solid #c4bbbb;
@@ -87,10 +168,10 @@
         "
       >
         <img src="./assets/img/facebook.png" width="25" height="25" />
-        <div style="margin-left: 10px;">Log in with facebook</div>
+        <div style="margin-left: 10px">Log in with facebook</div>
       </div>
-      <div style="margin-top: 20px; margin-bottom: 20px;">
-        <div style="color: rgb(0, 0, 175);">Forgot Password?</div>
+      <div style="margin-top: 20px; margin-bottom: 20px">
+        <div style="color: rgb(0, 0, 175)">Forgot Password?</div>
       </div>
     </div>
 
@@ -105,8 +186,8 @@
         padding-top: 25px;
       "
     >
-      <span style="margin-right: 10px;">Don't have an account?</span>
-      <span (click)="login()" style="color: rgb(0, 0, 175);">login</span>
+      <span style="margin-right: 10px">Already have an account?</span>
+      <span (click)="login()" style="color: rgb(0, 0, 175)">login</span>
     </div>
   </div>
 </div>
