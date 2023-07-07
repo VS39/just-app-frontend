@@ -13,4 +13,24 @@ export class PostService {
     let url = this.apiUrl + 'post/addPost';
     return this.http.post<any>(url, data);
   }
+
+  viewPosts(username: any) {
+    let url = this.apiUrl + `post/${username}/viewPosts`;
+    return this.http.get<any>(url);
+  }
+
+  updatePost(filter:any,id: any) {
+    let url = this.apiUrl + `post/${id}/updatePost`;
+    return this.http.put<any>(url,filter);
+  }
+
+  deletePost(id: any) {
+    let url = this.apiUrl + `post/${id}/deletePost`;
+    return this.http.delete<any>(url);
+  }
+
+  deleteImage(postId: any, filter: any) {
+    let url = this.apiUrl + `post/${postId}/deleteImage`;
+    return this.http.put<any>(url,filter);
+  }
 }

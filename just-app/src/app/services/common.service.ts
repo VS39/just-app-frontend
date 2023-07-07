@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { IconMessagePopUpComponent } from '../pop-ups/icon-message-pop-up/icon-message-pop-up.component';
 import * as CryptoJS from 'crypto-js';
 import { MessagePopUpComponent } from '../pop-ups/message-pop-up/message-pop-up.component';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ import { MessagePopUpComponent } from '../pop-ups/message-pop-up/message-pop-up.
 export class CommonService {
   key = 'aFpdCWpbkjhgfd@12345tgb4RhmX10Um'; // length == 32
   iv = 'Hp@0bJeW95EzxKup'; // length == 16
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog,private datePipe: DatePipe,) {}
 
   encrypt(value: any) {
     var key8 = CryptoJS.enc.Utf8.parse(this.key);
@@ -88,5 +89,56 @@ export class CommonService {
         }
       }
     });
+  }
+
+  getUploadTime(uploadedTime: any) {
+    const now = new Date();
+    let currentDate = this.datePipe.transform(now, 'yyyy-MM-dd');
+    let currentTime = this.datePipe.transform(now, 'HH:mm:ss');
+    let time: any;
+    if (currentDate && currentTime) {
+      time = currentDate + ' ' + currentTime;
+    }
+
+    const currentTimeNow = new Date(time);
+    const postUploadedTime = new Date(uploadedTime);
+    const timeDifference =
+      currentTimeNow.getTime() - postUploadedTime.getTime();
+
+    const durationInSeconds = Math.floor(timeDifference / 1000);
+    const durationInMinutes = Math.floor(durationInSeconds / 60);
+    const durationInHours = Math.floor(durationInMinutes / 60);
+    const durationInDays = Math.floor(durationInHours / 24);
+    const durationInWeeks = Math.floor(durationInDays / 7);
+
+    const currentYear = currentTimeNow.getFullYear();
+    const currentMonth = currentTimeNow.getMonth();
+    const postCreationYear = postUploadedTime.getFullYear();
+    const postCreationMonth = postUploadedTime.getMonth();
+
+    const durationInMonths =
+      (currentYear - postCreationYear) * 12 +
+      (currentMonth - postCreationMonth);
+
+    const durationInYears = Math.floor(durationInMonths / 12);
+
+    let durationString = '';
+
+    if (durationInYears > 0) {
+      durationString += `${durationInYears} year(s) ago`;
+    } else if (durationInMonths > 0) {
+      durationString += `${durationInMonths} month(s) ago`;
+    } else if (durationInWeeks > 0) {
+      durationString += `${durationInWeeks} week(s) ago`;
+    } else if (durationInDays > 0) {
+      durationString += `${durationInDays} day(s) ago`;
+    } else if (durationInHours > 0) {
+      durationString += `${durationInHours} hour(s) ago`;
+    } else if (durationInMinutes > 0) {
+      durationString += `${durationInMinutes} minute(s) ago`;
+    } else {
+      durationString += `${durationInSeconds} second(s) ago`;
+    }
+    return durationString;
   }
 }

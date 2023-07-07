@@ -3,9 +3,9 @@
     <div>
       <mat-toolbar class="mainColors navBarBorder">
         <div style="width: 80%; color: white">My Application</div>
-        <div style="width: 20%; justify-content: end; display: flex">
+        <div *ngIf="profileData" style="width: 20%; justify-content: end; display: flex">
           <img
-            src="./assets/img/city.jpg"
+            src="{{profileData.profilePic}}"
             alt="Avatar"
             class="profilePic"
             (click)="showProfile()"

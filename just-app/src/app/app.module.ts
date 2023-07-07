@@ -36,6 +36,7 @@ import {MatInputModule} from '@angular/material/input';
 import { AuthInterceptor } from './authentication/auth-interceptor';
 import { UpdateUserComponent } from './pop-ups/update-user/update-user.component';
 import { DatePipe } from '@angular/common';
+import { EditPostComponent } from './pop-ups/edit-post/edit-post.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { DatePipe } from '@angular/common';
     IconMessagePopUpComponent,
     ForgotPasswordComponent,
     UpdateUserComponent,
+    EditPostComponent,
   ],
   imports: [
     BrowserModule,

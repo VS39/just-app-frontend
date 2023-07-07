@@ -167,6 +167,9 @@
       <div (click)="outsideClick()" style="width: 70%; word-wrap: break-word">
         <div class="name">{{ profileData.name }}</div>
         <div class="userName">@{{ profileData.username }}</div>
+        <div style="margin-top: 10px" class="time">
+          {{ getJoinedTime(profileData.joinedTime) }}
+        </div>
         <div style="margin-top: 10px" class="bio">{{ profileData.bio }}</div>
         <div>
           <span class="website" (click)="openWebsiteLink()">{{
@@ -225,9 +228,7 @@
         >
           <div style="padding: 8px">
             <span class="tabText">Posts</span>
-            <span class="tabNumbers">{{
-              profileData.userPosts.length
-            }}</span>
+            <span class="tabNumbers">{{ profileData.userPosts.length }}</span>
           </div>
         </div>
         <div
@@ -262,7 +263,11 @@
     </div>
 
     <div (click)="outsideClick()" *ngIf="showTab == 'post'">
-      <app-show-profile-posts [userPosts]="profileData.userPosts"></app-show-profile-posts>
+      <app-show-profile-posts
+        (refreshPage)="refreshPage($event)"
+        [userPosts]="profileData.userPosts"
+        [showEditButtons]="showEditButtons"
+      ></app-show-profile-posts>
     </div>
 
     <div (click)="outsideClick()" *ngIf="showTab == 'followers'">

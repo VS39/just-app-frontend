@@ -2,6 +2,209 @@
   <div>
     <div class="mainBorder">What's Happening</div>
   </div>
+  <div style="margin-top: 3%">
+    <div
+      class="mainBorder"
+      style="padding: 0"
+      *ngIf="postsData && postsData.length == 0"
+      style="text-align: center; padding: 30px; font-weight: bold"
+    >
+      <div style="font-size: 14px">No posts to show</div>
+    </div>
+
+    <div
+      class="mainBorder"
+      style="padding-top: 0"
+      *ngIf="postsData && postsData.length != 0"
+    >
+      <div style="padding: 5px; text-align: end" *ngIf="postsData.length > 1">
+        <!-- <div>
+          <mat-icon
+            [ngStyle]="{
+              color: singlePost == false ? 'white' : ''
+            }"
+            (click)="changeGrid()"
+            class="gridIcon"
+            >view_compact</mat-icon
+          >
+        </div> -->
+      </div>
+      <div id="container">
+        <div
+          *ngFor="let element of postsData"
+          class="boxIn"
+          [ngStyle]="
+            singlePost == false
+              ? {
+                  width: '50%',
+                  height: '300px',
+                  border: '1px solid #0a3754',
+                  'border-radius': '10px',
+                  'margin-bottom': '2px'
+                }
+              : {}
+          "
+        >
+          <div
+            *ngIf="singlePost == true"
+            style="text-align: initial; margin: 10px; margin-bottom: 10px"
+          >
+            <div style="width: 80%; display: flex">
+              <div
+                (click)="goToProfile(element)"
+                class="ind-post-data"
+                style="margin-right: 2%; width: 10%"
+              >
+                <img
+                  *ngIf="element.profilePic != ''"
+                  class="profilePic"
+                  alt="Avatar"
+                  src="{{ element.uploadedByAvatar }}"
+                />
+                <i
+                  *ngIf="element.profilePic == ''"
+                  style="font-size: 45px"
+                  class="fa fa-user-circle noAvatar"
+                  ia-hidden="true"
+                ></i>
+              </div>
+              <div (click)="goToProfile(element)" style="cursor: pointer">
+                <div style="display: flex; align-items: baseline">
+                  <div class="name" style="margin-right: 5px">
+                    {{ element.uploadedByName }}
+                  </div>
+                  <div style="margin-right: 5px">.</div>
+                  <div class="time">
+                    {{ getUploadTime(element.uploadTime) }}
+                  </div>
+                </div>
+
+                <div class="userName">@{{ element.uploadedByUsername }}</div>
+              </div>
+            </div>
+            <div *ngIf="element.caption" style="width: 100%">
+              <div class="bio" style="padding: 15px">{{ element.caption }}</div>
+            </div>
+          </div>
+
+          <div *ngIf="element.image.length > 1" id="container">
+            <div
+              *ngFor="let data of element.image2; let i = index"
+              class="boxIn"
+              style="border: none"
+              [style.height.px]="element.height"
+              [style.width]="element.width"
+            >
+              <div *ngIf="i != 3" class="imageTransition">
+                <img
+                  (click)="expandImage(element, i)"
+                  src="{{ data.path }}"
+                  alt="Users Pics"
+                  class="allPosts"
+                  style="
+                    object-fit: cover;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 10px;
+                  "
+                />
+              </div>
+              <div
+                style="position: relative"
+                *ngIf="i == 3"
+                class="imageTransition"
+              >
+                <div
+                  *ngIf="element.image.length > 4"
+                  style="
+                    position: absolute;
+                    bottom: 10px;
+                    right: 10px;
+                    font-weight: bold;
+                  "
+                >
+                  <div
+                    class="plusMoreimages"
+                    (click)="expandImage(element, 4)"
+                    style="font-size: 14px; cursor: pointer"
+                  >
+                    + {{ element.image.length - 4 }} more image(s)
+                  </div>
+                </div>
+                <img
+                  (click)="expandImage(element, i)"
+                  src="{{ data.path }}"
+                  alt="Users Pics"
+                  class="allPosts"
+                  style="
+                    object-fit: cover;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 10px;
+                  "
+                />
+              </div>
+            </div>
+          </div>
+          <div *ngIf="element.image.length == 1">
+            <div
+              *ngFor="let data of element.image2; let i = index"
+              class="imageTransitionSingle"
+            >
+              <img
+                (click)="expandImage(element, i)"
+                [ngStyle]="singlePost == false ? { height: '100%' } : {}"
+                src="{{ data.path }}"
+                alt="Users Pics"
+                class="allPosts"
+                style="object-fit: cover; width: 100%; max-height: 650px"
+              />
+            </div>
+          </div>
+
+          <div
+            style="
+              display: flex;
+              justify-content: center;
+              margin-top: 10px;
+              margin-bottom: 10px;
+              width: 100%;
+            "
+          >
+            <div *ngIf="singlePost == true" style="display: flex; width: 100%">
+              <div class="post-actions" (click)="likePicture(element)">
+                <fa-icon
+                  class="post-actions-icons"
+                  style="font-size: 21px"
+                  [ngStyle]="{ color: element.liked == true ? '#ff0044' : '' }"
+                  [icon]="faHeart"
+                  transform="grow-2"
+                ></fa-icon>
+                <div class="likesText" style="margin-left: 8px">
+                  {{ element.likes }}
+                </div>
+              </div>
+              <div class="post-actions">
+                <mat-icon class="post-actions-icons likeIcon">
+                  comment</mat-icon
+                >
+                <div class="likesText">{{ element.comments }}</div>
+              </div>
+              <div class="post-actions">
+                <mat-icon class="post-actions-icons likeIcon">send</mat-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="mainPadding centreBlock">
+  <div>
+    <div class="mainBorder">What's Happening</div>
+  </div>
 
   <div *ngFor="let post of postdata" style="padding-top: 3%">
     <div class="mainBorder">
@@ -31,12 +234,10 @@
         "
       >
         <div>
-          <!-- <div style="width: 59%; height: 56%"> -->
           <div
             class="imageTransition"
             style="border: 1px solid grey; border-radius: 2%; min-width: 420px;"
           >
-            <!-- <div class="imageTransition" style="border: 1px solid grey; border-radius: 2%"> -->
             <img
               alt="Picture"
               style="
@@ -73,4 +274,4 @@
     </div>
   </div>
 </div>
-
+ -->

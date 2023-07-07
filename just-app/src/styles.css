@@ -369,6 +369,43 @@ ngb-carousel .wrapper > img {
   background-color: rgb(161 169 178 / 63%);
 }
 
-.noAvatar{
+.noAvatar {
   color: #d1d2d2ba;
 }
+
+.plusMoreimages:hover {
+  color: cornflowerblue;
+}
+
+.mat-mdc-menu-panel.mat-mdc-menu-panel{
+  background: #001828 !important;
+}
+
+.mat-mdc-menu-content {
+  padding: 0px !important;
+  border: 1px solid #0a3754 !important;
+  background: #001828 !important;
+  border-radius: 6px !important;
+}
+
+.mdc-list-item__primary-text {
+  color: white;
+  font-size: 14px !important;
+}
+
+.mat-mdc-menu-item .mat-icon-no-color,
+.mat-mdc-menu-submenu-icon {
+  color: white !important;
+  font-size: 14px !important;
+  align-items: center !important;
+  display: flex !important;
+}
+
+.mdc-list-item {
+  min-height: 40px !important;
+}
+.mdc-list-item:hover {
+  background: #8d8d8d30 !important;
+  /* background: #74757675 !important; */
+}
+

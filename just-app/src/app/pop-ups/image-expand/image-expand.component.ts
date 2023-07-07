@@ -1,9 +1,9 @@
-import { DatePipe } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-image-expand',
@@ -21,7 +21,8 @@ export class ImageExpandComponent {
   userData: any;
   imagesUrl: any[] = [];
 
-  constructor( private datePipe: DatePipe,
+  constructor( 
+    private commonService: CommonService,
     public dialogRef: MatDialogRef<ImageExpandComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -72,53 +73,6 @@ export class ImageExpandComponent {
   }
 
   getUploadTime(uploadedTime: any) {
-    const now = new Date();
-    let currentDate = this.datePipe.transform(now, 'yyyy-MM-dd');
-    let currentTime = this.datePipe.transform(now, 'HH:mm:ss');
-    let time: any;
-    if (currentDate && currentTime) {
-      time = currentTime = currentDate + ' ' + currentTime;
-    }
-
-    const currentTimeNow = new Date(time);
-    const postUploadedTime = new Date(uploadedTime);
-    const timeDifference =
-      currentTimeNow.getTime() - postUploadedTime.getTime();
-
-    const durationInSeconds = Math.floor(timeDifference / 1000);
-    const durationInMinutes = Math.floor(durationInSeconds / 60);
-    const durationInHours = Math.floor(durationInMinutes / 60);
-    const durationInDays = Math.floor(durationInHours / 24);
-    const durationInWeeks = Math.floor(durationInDays / 7);
-
-    const currentYear = currentTimeNow.getFullYear();
-    const currentMonth = currentTimeNow.getMonth();
-    const postCreationYear = postUploadedTime.getFullYear();
-    const postCreationMonth = postUploadedTime.getMonth();
-
-    const durationInMonths =
-      (currentYear - postCreationYear) * 12 +
-      (currentMonth - postCreationMonth);
-
-    const durationInYears = Math.floor(durationInMonths / 12);
-
-    let durationString="";
-
-    if (durationInYears > 0) {
-      durationString += `${durationInYears} year(s) ago`;
-    } else if (durationInMonths > 0) {
-      durationString += `${durationInMonths} month(s) ago`;
-    } else if (durationInWeeks > 0) {
-      durationString += `${durationInWeeks} week(s) ago`;
-    } else if (durationInDays > 0) {
-      durationString += `${durationInDays} day(s) ago`;
-    } else if (durationInHours > 0) {
-      durationString += `${durationInHours} hour(s) ago`;
-    } else if (durationInMinutes > 0) {
-      durationString += `${durationInMinutes} minute(s) ago`;
-    } else {
-      durationString += `${durationInSeconds} second(s) ago`;
-    }
-    return durationString;
+    return this.commonService.getUploadTime(uploadedTime);
   }
 }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { CommonService } from '../services/common.service';
 import { AuthService } from '../authentication/auth.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-sign-up',
@@ -28,6 +29,7 @@ export class SignUpComponent {
   });
 
   constructor(
+    private datePipe: DatePipe,
     private router: Router,
     private userService: UserService,
     private authService: AuthService,
@@ -79,14 +81,23 @@ export class SignUpComponent {
   }
 
   signUp() {
+    const now = new Date();
+    let currentDate = this.datePipe.transform(now, 'yyyy-MM-dd');
+    let currentTime = this.datePipe.transform(now, 'HH:mm:ss');
+    let time: any;
+    if (currentDate && currentTime) {
+      time = currentDate + ' ' + currentTime;
+    }
+
     this.submitted = true;
-    
+
     if (this.form.valid && !this.existingUsername) {
       let filter = {
         name: this.form.controls.Name.value,
         email: this.form.controls.Email.value,
         password: this.commonService.encrypt(this.form.controls.Password.value),
         username: this.form.controls.Username.value,
+        joinedTime: time,
       };
 
       this.authService.signUp(filter).subscribe((data: any) => {

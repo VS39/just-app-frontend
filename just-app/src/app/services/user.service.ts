@@ -20,12 +20,17 @@ export class UserService {
   }
 
   viewUser(username: any) {
-    let url = this.apiUrl + 'user/viewUser/' + username;
+    let url = this.apiUrl + 'user/' + username + '/viewUser';
+    return this.http.get<any>(url);
+  }
+
+  getUserPic(username: any) {
+    let url = this.apiUrl + 'user/' + username + '/getUserPic';
     return this.http.get<any>(url);
   }
 
   updateUser(filter: any, id: any) {
-    let url = this.apiUrl + 'user/updateUser/' + id;
+    let url = this.apiUrl + `user/${id}/updateUser`;
     return this.http.put<any>(url, filter);
   }
 
@@ -33,7 +38,7 @@ export class UserService {
     const postData = new FormData();
     postData.append('profilePic', profilePic);
     postData.append('imageType', imageType);
-    let url = this.apiUrl + 'user/updateUser/' + id;
+    let url = this.apiUrl + `user/${id}/updateUser`;
     return this.http.put<any>(url, postData);
   }
 
