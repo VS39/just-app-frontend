@@ -31,7 +31,7 @@
     <div style="flex: 1; overflow-y: auto">
       <div style="margin: 20px">
         <div class="mainBorder" style="width: 100%; background: #010f18">
-          <span class="textarea" role="textbox" contenteditable></span>
+          <span class="textarea" role="textbox" contenteditable  #captionControl></span>
         </div>
       </div>
 
@@ -108,6 +108,7 @@
       <div style="width: 90%">
         <div>
           <input
+          accept="image/png, image/jpeg, image/jpg"
             type="file"
             class="file-input"
             multiple
@@ -133,7 +134,10 @@
         </div>
       </div>
       <div style="width: 10%">
-        <div class="mainButton" (click)="post()">Post</div>
+        <div class="mainButtonBackgound" (click)="post(captionControl)">
+          <div style="padding: 3px; font-size: 14px">Post</div>
+        </div>
+        <!-- <div class="mainButton" (click)="post()">Post</div> -->
       </div>
     </div>
   </div>

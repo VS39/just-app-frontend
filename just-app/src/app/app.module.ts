@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-//import { MaterialModule } from '@angular/material.module';
-//import {BrowserAnimationsModule} from '@angular/platform browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
-
+import { MatIconModule } from '@angular/material/icon';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -27,10 +25,17 @@ import { ShowFollowersComponent } from './show-followers/show-followers.componen
 import { ShowProfilePostsComponent } from './show-profile-posts/show-profile-posts.component';
 import { ProfileImageExpandComponent } from './pop-ups/profile-image-expand/profile-image-expand.component';
 import { AddPostComponent } from './pop-ups/add-post/add-post.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { NgHttpLoaderModule } from 'ng-http-loader';
+import { MessagePopUpComponent } from './pop-ups/message-pop-up/message-pop-up.component';
+import { IconMessagePopUpComponent } from './pop-ups/icon-message-pop-up/icon-message-pop-up.component';
+import { ForgotPasswordComponent } from './pop-ups/forgot-password/forgot-password.component';
+import {MatInputModule} from '@angular/material/input';
+import { AuthInterceptor } from './authentication/auth-interceptor';
+import { UpdateUserComponent } from './pop-ups/update-user/update-user.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -49,10 +54,15 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     ShowProfilePostsComponent,
     ProfileImageExpandComponent,
     AddPostComponent,
+    MessagePopUpComponent,
+    IconMessagePopUpComponent,
+    ForgotPasswordComponent,
+    UpdateUserComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,
@@ -66,8 +76,9 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     ReactiveFormsModule,
     MatFormFieldModule,
     NgHttpLoaderModule.forRoot(),
+    MatInputModule,
   ],
-  providers: [],
+  providers: [DatePipe,{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

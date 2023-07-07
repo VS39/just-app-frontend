@@ -1,5 +1,5 @@
-<div style="justify-content: center; display: flex; ">
-  <div style="display: block;">
+<div style="justify-content: center; display: flex" class="loginColor">
+  <div style="display: block">
     <div
       style="
         text-align: center;
@@ -9,24 +9,70 @@
         border-radius: 5px;
       "
     >
-      <div style="margin-bottom: 70px; margin-top: 75px;">
-        Vartalaap
+      <div style="margin-bottom: 50px; margin-top: 75px">Vartalaap</div>
+      <div style="margin-bottom: 30px">
+        Login to see what your friends shared!
       </div>
-      <div class="Username">
-        <input
-          #username
-          placeholder="Username"
-          class="input"
-          (input)="usernameClick(username.value)"
-        />
+
+      <div [formGroup]="form">
+        <div class="box">
+          <input
+            [ngClass]="{
+              'input-error':
+                (submitted && form.controls.Username.status == 'INVALID') ||
+                (form.controls.Username.touched &&
+                  form.controls.Username.status == 'INVALID')
+            }"
+            placeholder="Username*"
+            class="input"
+            formControlName="Username"
+          />
+
+          <div>
+            <mat-error
+              *ngIf="
+                (submitted && form.controls.Username.status == 'INVALID') ||
+                (form.controls.Username.touched &&
+                  form.controls.Username.status == 'INVALID')
+              "
+              >Please enter username.</mat-error
+            >
+          </div>
+        </div>
+        <div class="box">
+          <input
+            style="padding-right: 32px"
+            [type]="showPassword ? 'text' : 'password'"
+            [ngClass]="{
+              'input-error':
+                (submitted && form.controls.Password.status == 'INVALID') ||
+                (form.controls.Password.touched &&
+                  form.controls.Password.status == 'INVALID')
+            }"
+            placeholder="Password*"
+            class="input"
+            formControlName="Password"
+          />
+          <i
+            class="eyeIcon"
+            [class]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"
+            (click)="eyeIconClick()"
+          ></i>
+          <div>
+            <mat-error
+              *ngIf="
+                (submitted && form.controls.Password.status == 'INVALID') ||
+                (form.controls.Password.touched &&
+                  form.controls.Password.status == 'INVALID')
+              "
+              >Please enter password.</mat-error
+            >
+          </div>
+        </div>
       </div>
+
       <div>
-        <input
-          #password
-          placeholder="Password"
-          class="input"
-          (input)="passwordClick(password.value)"
-        />
+        <mat-error>{{ errorMessage }}</mat-error>
       </div>
 
       <div
@@ -34,17 +80,16 @@
           justify-content: center;
           display: flex;
           margin-top: 20px;
-          margin-bottom: 30px;
+          margin-bottom: 10px;
           text-align: center;
         "
-        class="loginClick"
       >
         <div
-          (click)="login()"
+          (click)="logIn()"
           style="
             background: rgb(52, 165, 241);
             width: 268px;
-            color: white;
+            color: white !important;
             border-radius: 7px;
             align-content: center;
             height: 32px;
@@ -54,42 +99,13 @@
             cursor: pointer;
           "
         >
-          Log in
+          Log In
         </div>
       </div>
-      <div *ngIf="showRedSpan" style="padding-bottom: 10px;">
-        <span style="color: red;">Please enter username/password</span>
-      </div>
-      <div style="display: flex; justify-content: center; align-items: center;">
-        <div
-          style="
-            border-bottom: 1px solid #c4bbbb;
-            width: 100px;
-            margin-right: 20px;
-          "
-        ></div>
-        <div>OR</div>
-        <div
-          style="
-            border-bottom: 1px solid #c4bbbb;
-            width: 100px;
-            margin-left: 20px;
-          "
-        ></div>
-      </div>
-      <div
-        style="
-          align-items: center;
-          display: flex;
-          justify-content: center;
-          margin-top: 30px;
-        "
-      >
-        <img src="./assets/img/facebook.png" width="25" height="25" />
-        <div style="margin-left: 10px;">Log in with facebook</div>
-      </div>
-      <div style="margin-top: 20px; margin-bottom: 20px;">
-        <div style="color: rgb(0, 0, 175);">Forgot Password?</div>
+      <div style="margin-bottom: 10px">
+        <span class="linkButton" (click)="forgotPassword()"
+          >Forgot Password?</span
+        >
       </div>
     </div>
 
@@ -104,8 +120,8 @@
         padding-top: 25px;
       "
     >
-      <span style="margin-right: 10px;">Don't have an account?</span>
-      <span (click)="signup()" style="color: rgb(0, 0, 175);">Sign up</span>
+      <span style="margin-right: 10px">Don't have an account?</span>
+      <span (click)="signUp()" class="linkButton">Signup</span>
     </div>
   </div>
 </div>

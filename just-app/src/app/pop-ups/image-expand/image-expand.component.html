@@ -1,5 +1,8 @@
-<div style="display: flex ;max-height: 95vh; overflow: hidden;" class="mainColorsPopup">
-  <div style="width: 65%;overflow: auto; ">
+<div
+  style="display: flex; max-height: 95vh; overflow: hidden"
+  class="mainColorsPopup"
+>
+  <div style="width: 65%; overflow: auto">
     <!-- <div style="width: 59%; height: 56%"> -->
     <div
       class="imageTransition"
@@ -28,11 +31,18 @@
         <mat-icon class="icon buttonArrows">keyboard_arrow_right</mat-icon>
       </div>
 
-      <div class="roundButton" style="bottom: 20px">
+      <div
+        *ngIf="imagesUrl.length > 1"
+        class="roundButton"
+        style="bottom: 20px"
+      >
         <mat-icon
           *ngFor="let img of imagesUrl; let i = index"
           (click)="roundArrow(i)"
           class="icon buttonArrows"
+          [ngStyle]="{
+            'border': i == postIndex ? '2px solid #d0bdbd' : ''
+          }"
           style="height: 10px; margin-right: 2px; width: 10px"
           >keyboard_arrow_right</mat-icon
         >
@@ -40,29 +50,66 @@
       <!-- <div class="imageTransition" style="border: 1px solid grey; border-radius: 2%"> -->
       <img
         alt="Picture"
-        style="max-width: 700px; max-height: 700px; min-width:400px; min-height:400px"
+        style="
+          max-width: 700px;
+          max-height: 90vh;
+          min-width: 400px;
+          min-height: 40vh;
+          object-fit: contain;
+        "
         src="{{ img }}"
       />
+      <!--  style="max-width: 700px; max-height: 700px; min-width:400px; min-height:400px" -->
     </div>
   </div>
 
   <div style="width: 35%; display: flex">
-    <div style="padding: 3%; width: 90%;">
+    <div style="padding: 3%; width: 90%">
       <div style="display: flex; align-items: center">
         <div
+          (click)="goToProfile(userData)"
           class="ind-post-data"
           style="border: 1px solid #151414; border-radius: 50%"
         >
-          <img class="profilePic" alt="Avatar" src="{{ post.imgUrl }}" />
+          <img
+            *ngIf="userData.profilePic != ''"
+            class="profilePic"
+            alt="Avatar"
+            src="{{ userData.uploadedByAvatar }}"
+          />
+          <i
+            *ngIf="userData.profilePic == ''"
+            style="font-size: 45px"
+            class="fa fa-user-circle noAvatar"
+            ia-hidden="true"
+          ></i>
         </div>
-        <div class="ind-post-data">{{ post.name }}</div>
-        <div class="ind-post-data" class="userName">@{{ post.username }}</div>
-        <div class="ind-post-data">.</div>
-        <div class="ind-post-data" style="color: darkgray">{{ post.time }}</div>
-      </div>
-      <div style="margin-top: 10px">
         <div>
-          {{ post.caption }}
+          <div style="display: flex; align-items: baseline">
+            <div
+              (click)="goToProfile(userData)"
+              style="cursor: pointer; margin-right: 5px"
+              class="name"
+            >
+              {{ userData.uploadedByName }}
+            </div>
+            <div style="margin-right: 5px">.</div>
+            <div class="time">
+              {{ getUploadTime(userData.uploadTime) }}
+            </div>
+          </div>
+          <div
+            (click)="goToProfile(userData)"
+            class="userName"
+            style="cursor: pointer"
+          >
+            @{{ userData.uploadedByUsername }}
+          </div>
+        </div>
+      </div>
+      <div *ngIf="userData.caption" style="margin-top: 10px">
+        <div class="bio">
+          {{ userData.caption }}
         </div>
       </div>
       <div

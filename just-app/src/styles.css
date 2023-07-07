@@ -2,18 +2,21 @@
 
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+@import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
 
+html,
 body {
   display: block;
   margin: 0px;
+  height: 100%;
+  font-family: Roboto, "Helvetica Neue", sans-serif !important;
 }
 
+/* 
 * {
-  font-family: Raleway /* Replace with your custom font */, sans-serif !important;
-  /* Add !important to overwrite all elements */
-
-  /* color: white; */
-}
+  font-family: Raleway , sans-serif !important;
+} */
 
 .material-icons {
   font-family: "Material Icons" !important;
@@ -175,6 +178,21 @@ ngb-carousel .wrapper > img {
   font-size: 14px;
 }
 
+.time {
+  color: darkgray;
+  font-size: 14px;
+}
+
+.website {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.website:hover {
+  text-decoration: underline;
+  color: #3f7fe6d9;
+}
+
 .tabText {
   font-size: 14px;
   margin-right: 5px;
@@ -217,7 +235,7 @@ ngb-carousel .wrapper > img {
 
 .mainButtonBackgound {
   border: 1px solid #9f9c9ccc;
-  background-color: #8d8d8d30;
+  background-color: rgb(42 49 57 / 42%);
   border-radius: 6px;
   cursor: pointer;
   justify-content: center;
@@ -226,7 +244,10 @@ ngb-carousel .wrapper > img {
 }
 
 .mainButtonBackgound:hover {
-  background: #7d7d7d9c;
+  background-color: rgb(161 169 178 / 63%);
+  /* background-color: #34343494; */
+  /* background-color: #e9e5e533; */
+  /* background: #7d7d7d9c; */
 }
 
 .profileTab {
@@ -263,4 +284,91 @@ ngb-carousel .wrapper > img {
 }
 .classIcon:hover {
   background-color: rgb(66 68 70 / 75%);
+}
+
+.linkButton {
+  color: rgb(0, 0, 175);
+  cursor: pointer;
+}
+.popUpButton {
+  min-width: 4em;
+  border: 1px solid #a2a2a2;
+  background: white;
+  border-radius: 10px;
+  padding: 3px 10px;
+}
+.popUpButton:hover {
+  background: #f7f7f7;
+}
+.popUpButton:focus {
+  outline: none;
+}
+
+.popupColors {
+  min-width: 40vw;
+  min-height: 35vh;
+  background: white;
+  color: black;
+  text-align: center;
+}
+
+.box {
+  margin-bottom: 8px;
+}
+
+.input {
+  width: 268px;
+  height: 35px;
+  /* margin-bottom: 8px; */
+  border: 1px solid #e1dfdff5;
+  border-radius: 4px;
+  padding-left: 8px;
+  background: #efeded6b;
+}
+
+.input-error {
+  border: red 1px solid !important;
+}
+
+.input:focus {
+  outline: 1px solid rgb(75, 75, 75);
+}
+
+.eyeIcon {
+  position: absolute;
+  cursor: pointer;
+  margin-top: 9px;
+  margin-left: -25px;
+}
+
+.imgIcon {
+  color: #ffffffc2;
+  cursor: pointer;
+  background-color: rgb(42 49 57 / 42%);
+  border-radius: 50%;
+  padding: 7px;
+}
+
+.imgIcon:hover {
+  color: #e4e4e4c2;
+}
+
+.imgIcon2 {
+  border: 1px solid #9f9c9ccc;
+  background-color: rgb(42 49 57 / 42%);
+  border-radius: 6px;
+  cursor: pointer;
+  justify-content: center;
+  display: flex;
+  font-size: 14px;
+  padding: 7px;
+}
+
+.imgIcon2:hover {
+  /* color: #e4e4e4c2; */
+  background-color: rgb(161 169 178 / 63%);
+}
+
+.noAvatar{
+  color: #d1d2d2ba;
 }

@@ -1,6 +1,6 @@
 <div class="mainColors mainPadding centreBlock">
-  <div style="padding: 0%" class="mainBorder">
-    <div style="padding: 10px; display: flex">
+  <div style="padding: 0%" class="mainBorder" *ngIf="profileData && showPage">
+    <div style="padding: 10px; display: flex" (click)="outsideClick()">
       <div style="width: 80%; display: flex">
         <div class="back">
           <mat-icon (click)="back()" style="padding-left: 2px; padding-top: 1px"
@@ -13,6 +13,7 @@
       </div>
 
       <div
+        *ngIf="showEditButtons"
         style="
           width: 20%;
           align-items: center;
@@ -20,43 +21,201 @@
           justify-content: end;
         "
       >
-        <mat-icon (click)="addPost()">add_photo_alternate</mat-icon>
+        <mat-icon class="addPic" (click)="addPost()"
+          >add_photo_alternate</mat-icon
+        >
         <!-- <span>Add Post</span> -->
       </div>
     </div>
 
     <div style="position: relative; width: 100%">
-      <div style="position: absolute; left: 10px; bottom: 5px">
-        <img
-          (click)="expandImage(profilePic)"
-          src="{{ profilePic }}"
-          alt="Profile Picture"
-          class="profilePicUser"
-        />
+      <div
+        class="imageOptionsParent"
+        *ngIf="showProfileOptions && profileData.profilePic != ''"
+      >
+        <div
+          class="imageOptionsChild"
+          (click)="expandImage(profileData.profilePic)"
+        >
+          View profile picture
+        </div>
+        <div class="imageOptionsChild" (click)="fileUpload.click()">
+          Change profile picture
+        </div>
+        <div class="imageOptionsChild" (click)="removeImage('Profile')">
+          Remove profile picture
+        </div>
       </div>
 
-      <div style="position: absolute; right: 10px; bottom: 5px">
-        <div class="mainButtonBackgound">
+      <div
+        style="position: absolute; left: 10px; bottom: 5px; border-radius: 50%"
+      >
+        <div class="profilePicUser" style="position: relative">
+          <div style="position: absolute; right: 30px; top: 8px">
+            <input
+              accept="image/png, image/jpeg, image/jpg"
+              type="file"
+              class="file-input"
+              multiple
+              (change)="uploadPic($event, 'Profile')"
+              (click)="onFileClick($event)"
+              #fileUpload
+            />
+            <i
+              *ngIf="profileData.profilePic != '' && showEditButtons"
+              class="fa fa-camera imgIcon"
+              aria-hidden="true"
+              (click)="onUserPic('ProfilePic')"
+            ></i>
+            <i
+              *ngIf="profileData.profilePic == '' && showEditButtons"
+              class="fa fa-camera imgIcon"
+              aria-hidden="true"
+              (click)="fileUpload.click()"
+            ></i>
+          </div>
+
+          <i
+            *ngIf="profileData.profilePic == ''"
+            (click)="showEditButtons ? fileUpload.click() : ''"
+            class="fa fa-user-circle noAvatar"
+            style="
+              font-size: 130px;
+
+              box-shadow: 0px 1px 3px rgb(0 0 0 / 10%) inset,
+                0px 0px 8px rgb(215 215 215 / 18%);
+              border-radius: 50%;
+              padding-top: 6.6px;
+              height: 100%;
+              width: 100%;
+              padding-left: 2.6px;
+            "
+            aria-hidden="true"
+          ></i>
+
+          <img
+            *ngIf="profileData.profilePic != ''"
+            (click)="expandImage(profileData.profilePic)"
+            src="{{ profileData.profilePic }}"
+            alt="Profile Picture"
+            style="
+              width: 100%;
+              height: 100%;
+              border-radius: 50%;
+              object-fit: cover;
+              object-position: top;
+              box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset,
+                0px 0px 8px rgb(215 215 215 / 20%);
+            "
+          />
+        </div>
+      </div>
+
+      <div style="position: absolute; right: 10px; top: 10px">
+        <input
+          accept="image/png, image/jpeg"
+          type="file"
+          class="file-input"
+          multiple
+          (change)="uploadPic($event, 'Background')"
+          (click)="onFileClick($event)"
+          #fileUploadBackground
+        />
+        <i
+          *ngIf="showEditButtons"
+          class="fa fa-camera imgIcon"
+          aria-hidden="true"
+          (click)="fileUploadBackground.click()"
+        ></i>
+        <i
+          *ngIf="profileData.backgroundPic != '' && showEditButtons"
+          (click)="removeImage('Background')"
+          class="fa fa-times imgIcon"
+          aria-hidden="true"
+          style="margin-left: 10px; width: 30px; text-align: center"
+        ></i>
+      </div>
+
+      <div
+        *ngIf="showEditButtons"
+        style="position: absolute; right: 10px; bottom: 5px"
+      >
+        <div class="mainButtonBackgound" (click)="editProfile()">
           <div style="padding: 3px; font-size: 14px">Edit Profile</div>
         </div>
       </div>
 
-      <div>
+      <div class="backgoundPic">
+        <div
+          (click)="showEditButtons ? fileUploadBackground.click() : ''"
+          *ngIf="profileData.backgroundPic == ''"
+          class="backgroundAlternate"
+          style="background-image:  url('{{ defaultBackgroundPic }}');"
+        >
+          {{ showEditButtons ? "Add a background picture" : "" }}
+        </div>
         <img
-          (click)="expandImage(backgroundPic)"
-          src="{{ backgroundPic }}"
+          *ngIf="profileData.backgroundPic != ''"
+          (click)="expandImage(profileData.backgroundPic)"
+          src="{{ profileData.backgroundPic }}"
           alt="Background Image"
-          class="backgoundPic"
+          style="width: 100%; height: 100%; object-fit: cover"
         />
       </div>
     </div>
-    <div
-      style="padding: 10px; border-bottom: 2px solid #0a3754; padding-bottom: 0"
-    >
-      <div class="name">Vikrant Gautam</div>
-      <div class="userName">@vikrantgautam</div>
-      <div style="margin-top: 10px" class="bio">Hi, this is my bio.</div>
-      <div style="display: flex; margin-top: 10px">
+    <div style="width: 100%; display: flex; padding: 10px">
+      <div (click)="outsideClick()" style="width: 70%; word-wrap: break-word">
+        <div class="name">{{ profileData.name }}</div>
+        <div class="userName">@{{ profileData.username }}</div>
+        <div style="margin-top: 10px" class="bio">{{ profileData.bio }}</div>
+        <div>
+          <span class="website" (click)="openWebsiteLink()">{{
+            profileData.website
+          }}</span>
+        </div>
+      </div>
+      <div
+        *ngIf="!showEditButtons"
+        style="width: 30%; justify-content: end; display: flex"
+      >
+        <div>
+          <button
+            *ngIf="!profileData.isFollowing"
+            (click)="follow(profileData)"
+            style="padding: 4px; font-size: 14px; color: white"
+            class="mainButtonBackgound"
+          >
+            Follow
+          </button>
+          <button
+            *ngIf="profileData.isFollowing"
+            (click)="unfollow(profileData)"
+            style="
+              padding: 4px;
+              font-size: 14px;
+              color: white;
+              background: black;
+            "
+            class="mainButtonBackgound"
+          >
+            Following
+          </button>
+        </div>
+        <div style="margin-left: 10px">
+          <i class="far fa-comment-alt imgIcon2" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div
+        style="
+          display: flex;
+          margin-top: 10px;
+          border-bottom: 2px solid #0a3754;
+          padding-bottom: 0;
+        "
+      >
         <div
           class="profileTab"
           (click)="onTabClick('post')"
@@ -66,7 +225,9 @@
         >
           <div style="padding: 8px">
             <span class="tabText">Posts</span>
-            <span class="tabNumbers">{{ userData.length }}</span>
+            <span class="tabNumbers">{{
+              profileData.userPosts.length
+            }}</span>
           </div>
         </div>
         <div
@@ -78,7 +239,9 @@
         >
           <div style="padding: 8px">
             <span class="tabText">Followers</span>
-            <span class="tabNumbers">{{ userData.length }}</span>
+            <span class="tabNumbers">{{
+              profileData.userFollowers.length
+            }}</span>
           </div>
         </div>
         <div
@@ -90,28 +253,42 @@
         >
           <div style="padding: 8px">
             <span class="tabText">Following</span>
-            <span class="tabNumbers">{{ userData.length }}</span>
+            <span class="tabNumbers">{{
+              profileData.userFollowing.length
+            }}</span>
           </div>
         </div>
       </div>
     </div>
 
-    <div *ngIf="showTab == 'post'">
-      <app-show-profile-posts [userData]="userData"></app-show-profile-posts>
+    <div (click)="outsideClick()" *ngIf="showTab == 'post'">
+      <app-show-profile-posts [userPosts]="profileData.userPosts"></app-show-profile-posts>
     </div>
 
-    <div *ngIf="showTab == 'followers'">
+    <div (click)="outsideClick()" *ngIf="showTab == 'followers'">
       <app-show-followers
+        (followActionData)="followActionUser($event)"
         [showTab]="showTab"
-        [userData]="userData"
+        [data]="profileData.userFollowers"
+        [username]="profileData.username"
+        [loggedInUserId]="loggedInUserId"
+        [showEditButtons]="showEditButtons"
       ></app-show-followers>
     </div>
 
-    <div *ngIf="showTab == 'following'">
+    <div (click)="outsideClick()" *ngIf="showTab == 'following'">
       <app-show-followers
+        (followActionData)="followActionUser($event)"
         [showTab]="showTab"
-        [userData]="userData"
+        [data]="profileData.userFollowing"
+        [username]="profileData.username"
+        [loggedInUserId]="loggedInUserId"
+        [showEditButtons]="showEditButtons"
       ></app-show-followers>
     </div>
+  </div>
+
+  <div *ngIf="!profileData && showPage">
+    <app-page-not-found></app-page-not-found>
   </div>
 </div>

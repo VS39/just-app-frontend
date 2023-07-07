@@ -1,18 +1,23 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import { faChevronCircleDown } from '@fortawesome/free-solid-svg-icons';
 import { faChevronCircleUp } from '@fortawesome/free-solid-svg-icons';
+import { PostService } from 'src/app/services/post.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-add-post',
   templateUrl: './add-post.component.html',
   styleUrls: ['./add-post.component.css'],
 })
-export class AddPostComponent {
+export class AddPostComponent implements OnInit {
   fileName = '';
   filesAmount: any;
+  uploadImages: any;
+  currentTime: any;
+  caption: any = '';
   faImage = faImage;
   faChevronCircleDown = faChevronCircleDown;
   faChevronCircleUp = faChevronCircleUp;
@@ -21,28 +26,60 @@ export class AddPostComponent {
   showAllImages: boolean = false;
 
   constructor(
-    private http: HttpClient,
+    private datePipe: DatePipe,
+    private postService: PostService,
     public dialogRef: MatDialogRef<AddPostComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
+
+  ngOnInit() {}
 
   close() {
     this.dialogRef.close();
   }
 
-  post() {
-    this.dialogRef.close();
+  post(caption: any) {
+    this.caption = caption.innerText;
+
+    const now = new Date();
+
+    let currentDate = this.datePipe.transform(now, 'yyyy-MM-dd');
+    let currentTime = this.datePipe.transform(now, 'HH:mm:ss');
+    if (currentDate && currentTime) {
+      this.currentTime = currentDate + ' ' + currentTime;
+    }
+
+    const formData = new FormData();
+
+    if (this.uploadImages != undefined) {
+      for (const file of this.uploadImages) {
+        formData.append('image', file);
+      }
+    } else {
+      formData.append('image', 'file');
+    }
+
+    formData.append('id', this.data.id);
+    formData.append('caption', this.caption);
+    formData.append('uploadTime', this.currentTime);
+
+    this.postService.addPost(formData).subscribe((data: any) => {
+      if (data != null) {
+        if (data.Success) {
+          this.dialogRef.close("Yes");
+        }
+      }
+    });
   }
 
   onFileSelected(event: any) {
-    console.log(event);
     if (event.target.files && event.target.files[0]) {
+      this.uploadImages = event.target.files;
       this.filesAmount = event.target.files.length;
       for (let i = 0; i < this.filesAmount; i++) {
         var reader = new FileReader();
 
         reader.onload = (event: any) => {
-          console.log(event.target.result);
           this.images.push(event.target.result);
           this.firstFourImages.push(event.target.result);
         };

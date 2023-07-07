@@ -1,0 +1,49 @@
+.backGroundColor {
+  background: #001828;
+}
+
+.formInput {
+  color: white;
+  width: 100%;
+  background: #010f18;
+  border: 1px solid #0a3754;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #e0e0e0c9;
+}
+
+.formLabel {
+  width: 25%;
+  /* text-align: center; */
+  color: #e0dede;
+  /* font-weight: bold; */
+}
+
+.mainBox {
+  display: flex;
+  align-items: center;
+  margin: 20px 30px;
+}
+
+.textarea:focus {
+    outline: none !important;
+    outline-style: none !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+  }
+  
+  .textarea {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    /* resize: both; */
+    min-height: 40px;
+    line-height: 20px;
+  }
+  
+  .textarea[contenteditable]:empty::before {
+    content: "Add your bio here...";
+    color: #e0e0e0c9;
+  }

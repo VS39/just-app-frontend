@@ -1,0 +1,125 @@
+<div style="display: flex; max-height: 90vh" class="mainColors backGroundColor">
+  <div style="width: 100%; display: flex; flex-direction: column">
+    <div
+      style="
+        padding: 10px 0 10px 0;
+        display: flex;
+        border-bottom: 1px solid #0a3754;
+        flex: 0 0 auto;
+      "
+    >
+      <div style="width: 90%; margin-left: 10px">
+        <div style="font-weight: bold; align-items: center; display: flex">
+          Edit Profile
+        </div>
+      </div>
+
+      <div class="classIcon">
+        <mat-icon
+          style="padding-top: 1.6px; padding-left: 0.4px"
+          (click)="close()"
+          >close</mat-icon
+        >
+      </div>
+    </div>
+
+    <div
+      [formGroup]="form"
+      style="background: #001828; flex: 1; overflow-y: auto"
+    >
+      <div class="mainBox">
+        <div class="formLabel">Name</div>
+        <div style="width: 75%">
+          <input
+            type="text"
+            placeholder="Enter your name"
+            class="input formInput"
+            formControlName="Name"
+          />
+        </div>
+      </div>
+      <div class="mainBox">
+        <div class="formLabel">Username</div>
+        <div style="width: 75%">
+          <input
+            type="text"
+            [ngClass]="{
+              'input-error': existingUsername
+            }"
+            placeholder="Enter your username"
+            class="input formInput"
+            formControlName="Username"
+          />
+          <!-- (change)="checkExistingUser()" -->
+
+          <mat-error *ngIf="existingUsername">Username already exists</mat-error>
+
+        </div>
+      </div>
+      
+
+      <!-- <div class="mainBox">
+        <div class="formLabel">Bio</div>
+        <div style="width: 75%">
+          <input
+            type="text"
+            placeholder="Bio"
+            class="input formInput"
+            formControlName="Bio"
+          />
+        </div>
+      </div> -->
+
+      <div class="mainBox">
+        <div class="formLabel">Bio</div>
+        <div style="width: 75%">
+          <div>
+            <div
+              class="mainBorder"
+              style="width: 100%; background: #010f18; padding: 2%"
+            >
+              <span
+                class="textarea"
+                role="textbox"
+                contenteditable
+                #bioControl
+                >{{ bioControlData }}</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mainBox">
+        <div class="formLabel">Website</div>
+        <div style="width: 75%">
+          <input
+            type="text"
+            placeholder="Link to your website"
+            class="input formInput"
+            formControlName="Website"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div
+      style="
+        width: 100%;
+        flex: 0 0 auto;
+        display: flex;
+        padding: 15px 20px 15px 20px;
+        border-top: 1px solid #0a3754;
+      "
+      class="backGroundColor"
+    >
+      <div style="width: 90%"></div>
+      <div style="width: 10%">
+        <div class="mainButtonBackgound" (click)="save(bioControl)">
+          <div style="padding: 3px; font-size: 14px">Save</div>
+        </div>
+        <!-- <div class="mainButton" (click)="post()">Save</div> -->
+      </div>
+    </div>
+  </div>
+</div>
