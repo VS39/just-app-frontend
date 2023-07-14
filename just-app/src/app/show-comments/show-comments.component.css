@@ -1,0 +1,52 @@
+.menuIconsEdit {
+  color: #d4d4d4;
+  font-size: 14px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.menuIconsEdit:hover {
+  background: #8d8d8da1;
+  border-radius: 50%;
+}
+
+.textarea:focus {
+  outline: none !important;
+  outline-style: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+.textarea {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  /* resize: both; */
+  min-height: 40px;
+  line-height: 20px;
+}
+
+.textarea[contenteditable]:empty::before {
+  content: "Share your thoughts on this post...";
+  color: #c4c4c4;
+  cursor: text;
+}
+
+.inputArea {
+  border: 1px solid #0a3754;
+  border-radius: 10px;
+  margin-top: 10px;
+  background: #010f18;
+}
+
+.formInput {
+  color: white;
+  width: 100%;
+  background: #010f18;
+  border: 1px solid #0a3754;
+}
+
+.backGroundColor {
+  background: #001828;
+}

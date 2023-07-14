@@ -1,0 +1,117 @@
+<div style="display: flex; max-height: 90vh" class="mainColors backGroundColor">
+  <div style="width: 100%; display: flex; flex-direction: column">
+    <div
+      style="
+        padding: 10px 0 10px 0;
+        display: flex;
+        border-bottom: 1px solid #0a3754;
+        flex: 0 0 auto;
+      "
+    >
+      <div style="width: 90%; margin-left: 10px">
+        <div style="font-weight: bold; align-items: center; display: flex">
+          Add a Comment
+        </div>
+      </div>
+      <!-- <div style="width: 10%; text-align: end; margin-right: 5px">
+          <div>
+            <mat-icon (click)="close()">close</mat-icon>
+          </div>
+        </div> -->
+      <div class="classIcon">
+        <mat-icon
+          style="padding-top: 1.6px; padding-left: 0.4px"
+          (click)="close()"
+          >close</mat-icon
+        >
+        <!-- style="padding-top: 2px; padding-left: 1px" -->
+      </div>
+    </div>
+
+    <div style="flex: 1; overflow-y: auto">
+      <div style="text-align: initial; padding: 10px">
+        <div style="width: 100%">
+          <div style="color: #dad9d98f; margin-bottom: 10px">Replying to...</div>
+          <div style="width: 80%; display: flex">
+            <div
+              (click)="goToProfile(data)"
+              class="ind-post-data"
+              style="margin-right: 2%; width: 10%"
+            >
+              <img
+                *ngIf="data.profilePic != ''"
+                class="profilePic"
+                alt="Avatar"
+                src="{{ data.uploadedByAvatar }}"
+              />
+              <i
+                *ngIf="data.profilePic == ''"
+                style="font-size: 45px"
+                class="fa fa-user-circle noAvatar"
+                ia-hidden="true"
+              ></i>
+            </div>
+            <div (click)="goToProfile(data)" style="cursor: pointer">
+              <div style="display: flex; align-items: baseline">
+                <div class="name" style="margin-right: 5px">
+                  {{ data.uploadedByName }}
+                </div>
+                <div style="margin-right: 5px">.</div>
+                <div class="time">
+                  {{ getUploadTime(data.uploadTime) }}
+                </div>
+              </div>
+
+              <div class="userName">@{{ data.uploadedByUsername }}</div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="data.caption" style="width: 100%">
+          <div class="bio" style="padding: 15px 15px 0 15px">
+            {{ data.caption }}
+          </div>
+        </div>
+      </div>
+      <div style="margin: 10px 15px 15px 15px">
+        <div class="mainBorder" style="width: 100%; background: #010f18">
+          <span
+            class="textarea"
+            role="textbox"
+            contenteditable
+            #commentControl
+          ></span>
+        </div>
+      </div>
+    </div>
+
+    <div
+      style="
+        width: 100%;
+        flex: 0 0 auto;
+        align-items: center;
+        display: flex;
+        padding: 15px 20px 15px 20px;
+        border-top: 1px solid #0a3754;
+      "
+      class="backGroundColor"
+    >
+      <div style="width: 80%"></div>
+      <div style="width: 20%; display: flex">
+        <div class="mainButtonBackgound" style="margin-right: 10px">
+          <div style="padding: 3px; font-size: 14px" (click)="close()">
+            Cancel
+          </div>
+        </div>
+        <div class="mainButtonBackgound">
+          <div
+            style="padding: 3px; font-size: 14px"
+            (click)="addComment(commentControl)"
+          >
+            Add
+          </div>
+        </div>
+        <!-- <div class="mainButton" (click)="post()">Post</div> -->
+      </div>
+    </div>
+  </div>
+</div>

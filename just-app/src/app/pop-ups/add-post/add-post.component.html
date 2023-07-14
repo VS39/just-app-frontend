@@ -31,7 +31,12 @@
     <div style="flex: 1; overflow-y: auto">
       <div style="margin: 20px">
         <div class="mainBorder" style="width: 100%; background: #010f18">
-          <span class="textarea" role="textbox" contenteditable  #captionControl></span>
+          <span
+            class="textarea"
+            role="textbox"
+            contenteditable
+            #captionControl
+          ></span>
         </div>
       </div>
 
@@ -99,6 +104,7 @@
       style="
         width: 100%;
         flex: 0 0 auto;
+        align-items: center;
         display: flex;
         padding: 15px 20px 15px 20px;
         border-top: 1px solid #0a3754;
@@ -108,7 +114,7 @@
       <div style="width: 80%">
         <div>
           <input
-          accept="image/png, image/jpeg, image/jpg"
+            accept="image/png, image/jpeg, image/jpg"
             type="file"
             class="file-input"
             multiple
@@ -118,7 +124,10 @@
           />
 
           <div class="file-upload" style="display: flex; align-items: center">
-            <div *ngIf="images.length > 0" style="margin-right: 10px">
+            <div
+              *ngIf="images.length > 0"
+              style="font-size: 14px; margin-right: 10px"
+            >
               {{ images.length }} file(s) selected
             </div>
             <div>
@@ -133,16 +142,19 @@
           </div>
         </div>
       </div>
-      <div style="width: 20%; display: flex;">
-        <div
-          class="mainButtonBackgound"
-          style="margin-right: 10px"
-          (click)="close()"
-        >
-          <div style="padding: 3px; font-size: 14px">Cancel</div>
+      <div style="width: 20%; display: flex">
+        <div class="mainButtonBackgound" style="margin-right: 10px">
+          <div style="padding: 3px; font-size: 14px" (click)="close()">
+            Cancel
+          </div>
         </div>
-        <div class="mainButtonBackgound" (click)="post(captionControl)">
-          <div style="padding: 3px; font-size: 14px">Post</div>
+        <div class="mainButtonBackgound">
+          <div
+            style="padding: 3px; font-size: 14px"
+            (click)="post(captionControl)"
+          >
+            Post
+          </div>
         </div>
         <!-- <div class="mainButton" (click)="post()">Post</div> -->
       </div>

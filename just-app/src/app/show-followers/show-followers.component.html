@@ -1,10 +1,13 @@
-<div *ngIf="data.length != 0">
+<div *ngIf="data && data.length != 0">
   <div
     *ngFor="let element of data"
     style="padding: 2%; border-bottom: 1px solid #0a3754"
   >
     <div style="display: flex; align-items: center; width: 100%">
-      <div style="width: 80%; display: flex;cursor: pointer;" (click)="goToProfile(element)">
+      <div
+        style="width: 80%; display: flex; cursor: pointer"
+        (click)="goToProfile(element)"
+      >
         <div class="ind-post-data" style="margin-right: 2%; width: 10%">
           <img
             *ngIf="element.profilePic != ''"
@@ -30,14 +33,14 @@
         <div
           *ngIf="!element.showFollowingButton"
           class="mainButton"
-          (click)="followAction(element, 'follow')"
+          (click)="follow(element)"
         >
           Follow
         </div>
         <div
           *ngIf="element.showFollowingButton"
           class="mainButtonFollowing"
-          (click)="followAction(element, 'unfollow')"
+          (click)="unfollow(element)"
         >
           Following
         </div>
@@ -49,7 +52,7 @@
 </div>
 
 <div
-  *ngIf="data.length == 0"
+  *ngIf="data && data.length == 0"
   style="text-align: center; padding: 30px; font-weight: bold"
 >
   <div *ngIf="showTab == 'followers'" style="font-size: 14px">

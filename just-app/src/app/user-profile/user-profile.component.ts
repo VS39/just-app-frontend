@@ -7,6 +7,7 @@ import { UserService } from '../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UpdateUserComponent } from '../pop-ups/update-user/update-user.component';
 import { CommonService } from '../services/common.service';
+import { DeleteComponent } from '../pop-ups/delete/delete.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -20,6 +21,7 @@ export class UserProfileComponent implements OnInit {
   loggedInUserId: any;
   defaultBackgroundPic = './assets/img/aqua.jpg';
   showPage: boolean = false;
+  showGridButtons: boolean = true;
   showProfileOptions: boolean = false;
   showEditButtons: boolean = false;
 
@@ -130,26 +132,37 @@ export class UserProfileComponent implements OnInit {
           if (data != null) {
             if (data.Success) {
               this.viewUser();
-            } 
+            }
           }
         });
-    
     }
   }
 
   removeImage(imageType: any) {
     this.showProfileOptions = false;
-    let uploadedImage = '';
-    this.userService
-      .updateUserImage(uploadedImage, this.profileData.id, imageType)
-      .subscribe((data: any) => {
-        if (data != null) {
-          if (data.Success) {
-            this.viewUser();
-          } else {
-          }
-        }
-      });
+    const dialogRef = this.dialog.open(DeleteComponent, {
+      data: {
+        icon: 'fa fa-times',
+        message: 'Are you sure you want to remove the picture?',
+        button: 'Remove',
+      },
+    });
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result == 'Delete') {
+        
+        let uploadedImage = '';
+        this.userService
+          .updateUserImage(uploadedImage, this.profileData.id, imageType)
+          .subscribe((data: any) => {
+            if (data != null) {
+              if (data.Success) {
+                this.viewUser();
+              } else {
+              }
+            }
+          });
+      }
+    });
   }
 
   onFileClick(event: any) {
@@ -214,7 +227,7 @@ export class UserProfileComponent implements OnInit {
           //   '',
           //   ''
           // );
-  
+
           this.viewUser();
         }
       }
@@ -222,11 +235,12 @@ export class UserProfileComponent implements OnInit {
   }
 
   followActionUser(data: any) {
-    if (data.type == 'follow') {
-      this.follow(data);
-    } else {
-      this.unfollow(data);
-    }
+    this.viewUser();
+    // if (data.type == 'follow') {
+    //   this.follow(data);
+    // } else {
+    //   this.unfollow(data);
+    // }
   }
 
   getfollowList() {
@@ -250,8 +264,8 @@ export class UserProfileComponent implements OnInit {
   //   });
   // }
 
-  refreshPage(data:any){
-    if(data){
+  refreshPage(data: any) {
+    if (data) {
       this.viewUser();
     }
   }

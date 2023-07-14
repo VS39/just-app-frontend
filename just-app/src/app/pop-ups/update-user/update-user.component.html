@@ -52,25 +52,28 @@
           />
           <!-- (change)="checkExistingUser()" -->
 
-          <mat-error *ngIf="existingUsername">Username already exists</mat-error>
-
+          <mat-error *ngIf="existingUsername"
+            >Username already exists</mat-error
+          >
         </div>
       </div>
-      
-
-      <!-- <div class="mainBox">
-        <div class="formLabel">Bio</div>
-        <div style="width: 75%">
-          <input
-            type="text"
-            placeholder="Bio"
-            class="input formInput"
-            formControlName="Bio"
-          />
-        </div>
-      </div> -->
 
       <div class="mainBox">
+        <div class="formLabel">Bio</div>
+        <div style="width: 75%">
+          <!-- <textarea class="bio textarea" id="bannernote"  #bannernote *ngIf="element.editComment" cdkTextareaAutosize matInput ></textarea> -->
+
+          <textarea
+            cdkTextareaAutosize
+            style="min-height: 50px"
+            placeholder="Add your bio here..."
+            class="input formInput"
+            formControlName="Bio"
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- <div class="mainBox">
         <div class="formLabel">Bio</div>
         <div style="width: 75%">
           <div>
@@ -88,7 +91,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="mainBox">
         <div class="formLabel">Website</div>
@@ -113,12 +116,16 @@
       "
       class="backGroundColor"
     >
-      <div style="width: 90%"></div>
-      <div style="width: 10%">
-        <div class="mainButtonBackgound" (click)="save(bioControl)">
-          <div style="padding: 3px; font-size: 14px">Save</div>
+      <div style="width: 80%"></div>
+      <div style="width: 20%; display: flex">
+        <div class="mainButtonBackgound" style="margin-right: 10px">
+          <div style="padding: 3px; font-size: 14px" (click)="close()">
+            Cancel
+          </div>
         </div>
-        <!-- <div class="mainButton" (click)="post()">Save</div> -->
+        <div class="mainButtonBackgound">
+          <div style="padding: 3px; font-size: 14px" (click)="save()">Save</div>
+        </div>
       </div>
     </div>
   </div>

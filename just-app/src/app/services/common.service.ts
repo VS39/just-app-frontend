@@ -11,7 +11,7 @@ import { DatePipe } from '@angular/common';
 export class CommonService {
   key = 'aFpdCWpbkjhgfd@12345tgb4RhmX10Um'; // length == 32
   iv = 'Hp@0bJeW95EzxKup'; // length == 16
-  constructor(public dialog: MatDialog,private datePipe: DatePipe,) {}
+  constructor(public dialog: MatDialog, private datePipe: DatePipe) {}
 
   encrypt(value: any) {
     var key8 = CryptoJS.enc.Utf8.parse(this.key);
@@ -23,7 +23,7 @@ export class CommonService {
       mode: CryptoJS.mode.CBC,
       padding: CryptoJS.pad.Pkcs7,
     }).toString();
-  } 
+  }
 
   decrypt(value: any) {
     var key8 = CryptoJS.enc.Utf8.parse(this.key);
@@ -140,5 +140,31 @@ export class CommonService {
       durationString += `${durationInSeconds} second(s) ago`;
     }
     return durationString;
+  }
+
+  getCurrentTime() {
+    const now = new Date();
+    let currentTimeNow;
+
+    let currentDate = this.datePipe.transform(now, 'yyyy-MM-dd');
+    let currentTime = this.datePipe.transform(now, 'HH:mm:ss');
+    if (currentDate && currentTime) {
+      currentTimeNow = currentDate + ' ' + currentTime;
+    }
+    return currentTimeNow;
+  }
+
+  formatNumber(number: any) {
+    if (number >= 1000000) {
+      return (number / 1000000).toFixed(1) + 'M';
+    } else if (number >= 100000) {
+      return (number / 1000).toFixed(0) + 'k';
+    } else if (number >= 10000) {
+      return (number / 1000).toFixed(1) + 'k';
+    } else if (number >= 1000) {
+      return (number / 1000).toFixed(2) + 'k';
+    } else {
+      return number.toString();
+    }
   }
 }

@@ -168,6 +168,14 @@ ngb-carousel .wrapper > img {
   font-weight: bold;
 }
 
+.showMore {
+  color: #afafafc2 !important;
+  cursor: pointer;
+}
+.showMore:hover {
+  color: #0f99d4 !important;
+}
+
 .userName {
   color: cadetblue;
   font-size: 14px;
@@ -176,6 +184,15 @@ ngb-carousel .wrapper > img {
 .bio {
   color: #e3d3d3;
   font-size: 14px;
+}
+
+.viewReply {
+  color: #a9a9a9ad;
+  font-size: 14px;
+}
+
+.viewReply:hover {
+  color: #eeededbf;
 }
 
 .time {
@@ -241,6 +258,8 @@ ngb-carousel .wrapper > img {
   justify-content: center;
   display: flex;
   font-size: 14px;
+  height: 28px;
+  min-width: 50px;
 }
 
 .mainButtonBackgound:hover {
@@ -377,7 +396,7 @@ ngb-carousel .wrapper > img {
   color: cornflowerblue;
 }
 
-.mat-mdc-menu-panel.mat-mdc-menu-panel{
+.mat-mdc-menu-panel.mat-mdc-menu-panel {
   background: #001828 !important;
 }
 
@@ -409,3 +428,6 @@ ngb-carousel .wrapper > img {
   /* background: #74757675 !important; */
 }
 
+.likeActionColor {
+  color: #d70a41;
+}

@@ -5,6 +5,8 @@
 }
 
 .imageTransition:hover {
+  z-index: 1;
+  position: relative;
   -webkit-transform: scale(1.2);
   -ms-transform: scale(1.2);
   transform: scale(1.06);
@@ -30,7 +32,7 @@
 
 .boxIn {
   /* width: 49%; */
-  padding: 2px;
+  /* padding: 2px; */
   /* margin-top: 20px; */
   /* margin-bottom: 20px; */
   border-bottom: 2px solid #0a3754;
@@ -45,6 +47,8 @@
   max-width: 100%;
   cursor: pointer;
   border-radius: 10px;
+  padding: 1px;
+
   /* margin: 2px; */
   /* height: 100%; */
 }
@@ -69,4 +73,3 @@
   height: auto;
   font-size: 18px;
 }
-

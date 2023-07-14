@@ -17,6 +17,7 @@
 .textarea[contenteditable]:empty::before {
   content: "Add your caption...";
   color: #c4c4c4;
+  cursor: text;
 }
 
 .file-input {

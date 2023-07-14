@@ -10,7 +10,6 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./update-user.component.css'],
 })
 export class UpdateUserComponent {
-  bioControlData: any = '';
   usernameValue: any;
   existingUsername: boolean = false;
 
@@ -31,7 +30,6 @@ export class UpdateUserComponent {
     this.form.controls.Name.setValue(data.name);
     this.form.controls.Username.setValue(data.username);
     this.form.controls.Bio.setValue(data.bio);
-    this.bioControlData = this.form.controls.Bio.value;
     this.form.controls.Website.setValue(data.website);
   }
 
@@ -58,9 +56,8 @@ export class UpdateUserComponent {
     }
   }
 
-  save(bio: any) {
+  save() {
     this.checkExistingUser();
-    this.form.controls.Bio.setValue(bio.innerText);
     if (!this.existingUsername) {
       let filter = {
         name: this.form.controls.Name.value,
@@ -80,7 +77,7 @@ export class UpdateUserComponent {
               //   '',
               //   // 'Click ok to continue.'
               // );
-              localStorage.setItem('userName',data.Data.username ); 
+              localStorage.setItem('userName', data.Data.username);
               this.dialogRef.close(data.Data.username);
             } else {
             }

@@ -267,6 +267,7 @@
         (refreshPage)="refreshPage($event)"
         [userPosts]="profileData.userPosts"
         [showEditButtons]="showEditButtons"
+        [showGridButtons]="showGridButtons"
       ></app-show-profile-posts>
     </div>
 
@@ -276,7 +277,6 @@
         [showTab]="showTab"
         [data]="profileData.userFollowers"
         [username]="profileData.username"
-        [loggedInUserId]="loggedInUserId"
         [showEditButtons]="showEditButtons"
       ></app-show-followers>
     </div>
@@ -287,7 +287,6 @@
         [showTab]="showTab"
         [data]="profileData.userFollowing"
         [username]="profileData.username"
-        [loggedInUserId]="loggedInUserId"
         [showEditButtons]="showEditButtons"
       ></app-show-followers>
     </div>

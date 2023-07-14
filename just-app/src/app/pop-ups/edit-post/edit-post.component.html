@@ -30,14 +30,21 @@
 
     <div style="flex: 1; overflow-y: auto">
       <div style="margin: 20px">
-        <div class="mainBorder" style="width: 100%; background: #010f18">
-          <span
+        <div style="width: 100%; background: #010f18">
+          <textarea
+          [(ngModel)]="caption"
+            cdkTextareaAutosize
+            style="min-height: 50px"
+            placeholder="Add your caption here..."
+            class="input formInput"
+          ></textarea>
+          <!-- <span
             class="textarea"
             role="textbox"
             contenteditable
             #captionControl
-            >{{ caption }}</span
-          >
+            >{{ caption }}</span -->
+          
         </div>
       </div>
 
@@ -112,23 +119,35 @@
       style="
         width: 100%;
         flex: 0 0 auto;
+        align-items: center;
         display: flex;
         padding: 15px 20px 15px 20px;
         border-top: 1px solid #0a3754;
       "
       class="backGroundColor"
     >
-      <div style="width: 80%"></div>
-      <div style="width: 20%; display: flex">
+      <div style="width: 80%">
         <div
-          class="mainButtonBackgound"
-          style="margin-right: 10px"
-          (click)="close()"
+          *ngIf="deleteImageIds && deleteImageIds.length > 0"
+          style="font-size: 14px; margin-right: 10px"
         >
-          <div style="padding: 3px; font-size: 14px">Cancel</div>
+          The selected image(s) will be deleted from this post when you press
+          Save
         </div>
-        <div class="mainButtonBackgound" (click)="update(captionControl)">
-          <div style="padding: 3px; font-size: 14px">Save</div>
+      </div>
+      <div style="width: 20%; display: flex">
+        <div class="mainButtonBackgound" style="margin-right: 10px">
+          <div style="padding: 3px; font-size: 14px" (click)="close()">
+            Cancel
+          </div>
+        </div>
+        <div class="mainButtonBackgound">
+          <div
+            style="padding: 3px; font-size: 14px"
+            (click)="update()"
+          >
+            Save
+          </div>
         </div>
       </div>
     </div>

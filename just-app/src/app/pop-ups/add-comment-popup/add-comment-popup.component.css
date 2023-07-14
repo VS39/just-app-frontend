@@ -1,0 +1,66 @@
+.textarea:focus {
+    outline: none !important;
+    outline-style: none !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+  }
+  
+  .textarea {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    /* resize: both; */
+    min-height: 40px;
+    line-height: 20px;
+  }
+  
+  .textarea[contenteditable]:empty::before {
+    content: "Share your thoughts on this post...";
+    color: #c4c4c4;
+    cursor: text;
+  }
+  
+  .file-input {
+    display: none;
+  }
+  
+  .backGroundColor {
+    background: #001828;
+  }
+  /* 
+  .classIcon {
+    border-radius: 50%;
+    position: absolute;
+    text-align: center;
+    background: black;
+    right: 8px;
+    top: 8px;
+    backdrop-filter: blur(4px);
+    background-color: rgba(15, 20, 25, 0.75);
+  }
+  .classIcon:hover {
+    background-color: rgb(66 68 70 / 75%);
+  } */
+  
+  .single-image {
+    width: 100%;
+  }
+  
+  .multi-image {
+    width: 50%;
+    display: inline-block;
+  }
+  
+  #container {
+    display: flex;
+    width: 500px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .box {
+    padding: 5px;
+    width: 100%;
+    text-align: center;
+  }
+  

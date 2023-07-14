@@ -16,6 +16,7 @@ import { PostService } from 'src/app/services/post.service';
 export class EditPostComponent {
   fileName = '';
   filesAmount: any;
+  deleteImageIds: any;
   uploadImages: any;
   currentTime: any;
   caption: any = '';
@@ -27,12 +28,10 @@ export class EditPostComponent {
   showAllImages: boolean = false;
 
   constructor(
-    private datePipe: DatePipe,
     private postService: PostService,
     public dialogRef: MatDialogRef<EditPostComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    console.log(data);
   }
 
   ngOnInit() {
@@ -44,8 +43,7 @@ export class EditPostComponent {
     this.dialogRef.close();
   }
 
-  update(caption: any) {
-    this.caption = caption.innerText;
+  update() {
     let filter = {
       caption: this.caption,
     };
@@ -54,7 +52,9 @@ export class EditPostComponent {
       .subscribe((data: any) => {
         if (data != null) {
           if (data.Success) {
-            this.deleteImage();
+            if (this.deleteImageIds && this.deleteImageIds.length > 0) {
+              this.deleteImage();
+            }
 
             this.dialogRef.close('Yes');
           }
@@ -64,15 +64,19 @@ export class EditPostComponent {
 
   getImagesToDelete(element: any) {
     element.deleteImage = !element.deleteImage;
+
+    this.deleteImageIds = this.images
+      .filter((image) => image.deleteImage === true)
+      .map((image) => image._id);
   }
 
   deleteImage() {
-    const deleteImageIds = this.images
-      .filter((image) => image.deleteImage === true)
-      .map((image) => image._id);
+    // this.deleteImageIds = this.images
+    //   .filter((image) => image.deleteImage === true)
+    //   .map((image) => image._id);
 
     let filter = {
-      imageId: deleteImageIds,
+      imageId: this.deleteImageIds,
     };
 
     this.postService

@@ -37,6 +37,11 @@ import { AuthInterceptor } from './authentication/auth-interceptor';
 import { UpdateUserComponent } from './pop-ups/update-user/update-user.component';
 import { DatePipe } from '@angular/common';
 import { EditPostComponent } from './pop-ups/edit-post/edit-post.component';
+import { DeleteComponent } from './pop-ups/delete/delete.component';
+import { LikesPopupComponent } from './pop-ups/likes-popup/likes-popup.component';
+import { AddCommentPopupComponent } from './pop-ups/add-comment-popup/add-comment-popup.component';
+import { CommentsPopupComponent } from './pop-ups/comments-popup/comments-popup.component';
+import { ShowCommentsComponent } from './show-comments/show-comments.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +65,11 @@ import { EditPostComponent } from './pop-ups/edit-post/edit-post.component';
     ForgotPasswordComponent,
     UpdateUserComponent,
     EditPostComponent,
+    DeleteComponent,
+    LikesPopupComponent,
+    AddCommentPopupComponent,
+    CommentsPopupComponent,
+    ShowCommentsComponent,
   ],
   imports: [
     BrowserModule,

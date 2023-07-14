@@ -1,12 +1,14 @@
+<!-- max-height: 95vh; -->
 <div
-  style="display: flex; max-height: 95vh; overflow: hidden"
+  style="display: flex; width: 100%; height: 100%; overflow: hidden"
   class="mainColorsPopup"
 >
-  <div style="width: 65%; overflow: auto">
+  <div style="width: 65%; background-color: black; overflow: auto">
     <!-- <div style="width: 59%; height: 56%"> -->
     <div
       class="imageTransition"
       style="
+        height: 100%;
         justify-content: center;
         display: flex;
         width: 100%;
@@ -41,7 +43,7 @@
           (click)="roundArrow(i)"
           class="icon buttonArrows"
           [ngStyle]="{
-            'border': i == postIndex ? '2px solid #d0bdbd' : ''
+            border: i == postIndex ? '2px solid #d0bdbd' : ''
           }"
           style="height: 10px; margin-right: 2px; width: 10px"
           >keyboard_arrow_right</mat-icon
@@ -50,105 +52,168 @@
       <!-- <div class="imageTransition" style="border: 1px solid grey; border-radius: 2%"> -->
       <img
         alt="Picture"
-        style="
-          max-width: 700px;
-          max-height: 90vh;
-          min-width: 400px;
-          min-height: 40vh;
-          object-fit: contain;
-        "
+        style="min-width: 400px; min-height: 40vh; object-fit: contain"
         src="{{ img }}"
       />
+      <!-- max-width: 700px; max-height: 90vh; -->
       <!--  style="max-width: 700px; max-height: 700px; min-width:400px; min-height:400px" -->
     </div>
   </div>
 
-  <div style="width: 35%; display: flex">
-    <div style="padding: 3%; width: 90%">
-      <div style="display: flex; align-items: center">
-        <div
-          (click)="goToProfile(userData)"
-          class="ind-post-data"
-          style="border: 1px solid #151414; border-radius: 50%"
-        >
-          <img
-            *ngIf="userData.profilePic != ''"
-            class="profilePic"
-            alt="Avatar"
-            src="{{ userData.uploadedByAvatar }}"
-          />
-          <i
-            *ngIf="userData.profilePic == ''"
-            style="font-size: 45px"
-            class="fa fa-user-circle noAvatar"
-            ia-hidden="true"
-          ></i>
-        </div>
-        <div>
-          <div style="display: flex; align-items: baseline">
+  <div style="width: 35%; overflow: auto">
+    <div style="display: flex">
+      <div style="padding: 10px; width: 100%">
+        <div style="display: flex; align-items: center">
+          <div style="display: flex">
             <div
               (click)="goToProfile(userData)"
-              style="cursor: pointer; margin-right: 5px"
-              class="name"
+              class="ind-post-data"
+              style="border: 1px solid #151414; border-radius: 50%"
             >
-              {{ userData.uploadedByName }}
+              <img
+                *ngIf="userData.profilePic != ''"
+                class="profilePic"
+                alt="Avatar"
+                src="{{ userData.uploadedByAvatar }}"
+              />
+              <i
+                *ngIf="userData.profilePic == ''"
+                style="font-size: 45px"
+                class="fa fa-user-circle noAvatar"
+                ia-hidden="true"
+              ></i>
             </div>
-            <div style="margin-right: 5px">.</div>
-            <div class="time">
-              {{ getUploadTime(userData.uploadTime) }}
+            <div>
+              <div style="display: flex; align-items: baseline">
+                <div
+                  (click)="goToProfile(userData)"
+                  style="cursor: pointer; margin-right: 5px"
+                  class="name"
+                >
+                  {{ userData.uploadedByName }}
+                </div>
+                <div style="margin-right: 5px">.</div>
+                <div class="time">
+                  {{ getUploadTime(userData.uploadTime) }}
+                </div>
+              </div>
+              <div
+                (click)="goToProfile(userData)"
+                class="userName"
+                style="cursor: pointer"
+              >
+                @{{ userData.uploadedByUsername }}
+              </div>
             </div>
+          </div>
+          <div class="classIcon">
+            <mat-icon
+              style="padding-top: 1.6px; padding-left: 0.4px"
+              (click)="close()"
+              >close</mat-icon
+            >
+          </div>
+        </div>
+        <div *ngIf="userData.caption" style="margin-top: 10px">
+          <!-- <div class="bio">
+            {{ userData.caption }}
+          </div> -->
+          <div
+          *ngIf="userData.caption.length > trimNo && !userData.showFullText"
+            class="bio"
+            style="padding: 15px"
+          >
+            {{ userData.caption.substring(0, trimNo) }}
+
+            <span
+              (click)="showMore(userData)"
+              class="bio showMore"
+              *ngIf="!userData.showFullText"
+              >...show more</span
+            >
           </div>
           <div
-            (click)="goToProfile(userData)"
-            class="userName"
-            style="cursor: pointer"
+            *ngIf="userData.caption.length <= trimNo || userData.showFullText"
+            class="bio"
+            style="padding: 15px"
           >
-            @{{ userData.uploadedByUsername }}
-          </div>
-        </div>
-      </div>
-      <div *ngIf="userData.caption" style="margin-top: 10px">
-        <div class="bio">
-          {{ userData.caption }}
-        </div>
-      </div>
-      <div
-        style="
-          display: flex;
-          justify-content: center;
-          margin-top: 20px;
-          width: 100%;
-        "
-      >
-        <div style="display: flex; width: 100%; margin-top: 10px">
-          <div class="post-actions" (click)="likePicture()">
-            <fa-icon
-              class="post-actions-icons"
-              style="font-size: 21px"
-              [ngStyle]="{ color: post.liked == true ? '#ff0044' : '' }"
-              [icon]="faHeart"
-              transform="grow-5"
-            ></fa-icon>
+            {{ userData.caption
+            }}<span
+              (click)="hide(userData)"
+              class="bio showMore"
+              *ngIf="userData.showFullText"
+              >...hide</span
+            >
           </div>
 
-          <div class="post-actions">
-            <mat-icon class="post-actions-icons"> comment</mat-icon>
-          </div>
-          <div class="post-actions">
-            <mat-icon class="post-actions-icons">send</mat-icon>
-          </div>
         </div>
       </div>
     </div>
-    <!-- <div style="width: 10%; justify-content: end; display: flex">
-      <mat-icon (click)="close()">close</mat-icon>
-    </div> -->
-    <div class="classIcon">
-      <mat-icon
-        style="padding-top: 1.6px; padding-left: 0.4px"
-        (click)="close()"
-        >close</mat-icon
-      >
+
+    <div
+      style="
+        padding: 10px 0;
+        border-top: 2px solid #0a3754;
+        border-bottom: 2px solid #0a3754;
+      "
+    >
+      <div style="display: flex; width: 100%">
+        <div class="post-actions">
+          <fa-icon
+            (click)="likePicture()"
+            style="font-size: 21px"
+            [ngClass]="
+              data.postImage._value.userData.likes.isLiked
+                ? 'likeActionColor'
+                : 'post-actions-icons'
+            "
+            [icon]="faHeart"
+            transform="grow-2"
+          ></fa-icon>
+          <div
+            (click)="
+              data.postImage._value.userData.likes.count != 0
+                ? seeLikes()
+                : likePicture()
+            "
+            class="likesText"
+            style="margin-left: 8px"
+          >
+            {{ formatNumber(data.postImage._value.userData.likes.count) }}
+            like(s)
+          </div>
+        </div>
+
+        <div class="post-actions">
+          <mat-icon (click)="addComment()" class="post-actions-icons">
+            comment</mat-icon
+          >
+          <div
+            (click)="addComment()"
+            class="likesText"
+            style="margin-left: 8px"
+          >
+            {{
+              formatNumber(
+                data.postImage._value.userData.comments.commentsCount
+              )
+            }}
+          </div>
+        </div>
+        <div class="post-actions">
+          <i class="fa fa-share post-actions-icons" aria-hidden="true"></i>
+          <!-- <mat-icon class="post-actions-icons">send</mat-icon> -->
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <app-show-comments
+          (followActionData)="followActionUser($event)"
+          [data]="data.postImage._value.userData"
+        ></app-show-comments>
+      </div>
     </div>
   </div>
 </div>

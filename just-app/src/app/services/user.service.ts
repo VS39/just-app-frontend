@@ -29,6 +29,11 @@ export class UserService {
     return this.http.get<any>(url);
   }
 
+  getUserDetails(filter: any) {
+    let url = this.apiUrl + 'user/getUserDetails';
+    return this.http.put<any>(url,filter);
+  }
+
   updateUser(filter: any, id: any) {
     let url = this.apiUrl + `user/${id}/updateUser`;
     return this.http.put<any>(url, filter);
@@ -43,12 +48,12 @@ export class UserService {
   }
 
   follow(filter: any, id: any) {
-    let url = this.apiUrl + 'user/' + id + '/follow';
+    let url = this.apiUrl + 'user/' + id + '/followUser';
     return this.http.post<any>(url, filter);
   }
 
   unfollow(filter: any, id: any) {
-    let url = this.apiUrl + 'user/' + id + '/unfollow';
+    let url = this.apiUrl + 'user/' + id + '/unfollowUser';
     return this.http.post<any>(url, filter);
   }
 

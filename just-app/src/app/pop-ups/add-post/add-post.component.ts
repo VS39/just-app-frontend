@@ -134,4 +134,6 @@ export class AddPostComponent implements OnInit {
   showMoreImages() {
     this.showAllImages = !this.showAllImages;
   }
+
+  
 }
