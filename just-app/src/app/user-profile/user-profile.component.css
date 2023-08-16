@@ -8,7 +8,59 @@
 }
 
 .back:hover {
-  border: 1px solid #80808087;
+  /* border: 1px solid #80808087; */
   border-radius: 50%;
-  background: #80808087;
+  /* background: #80808087; */
+  background: #e4e4e46b;
+}
+
+.backgroundAlternate {
+  background: black;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
+  color: #ffffffb5;
+}
+
+.file-input {
+  display: none;
+}
+
+.addPic:hover {
+  color: #a4a3a3e8;
+}
+
+/* .imgIcon {
+  color: #ffffffc2;
+  cursor: pointer;
+  background-color: rgb(42 49 57 / 42%);
+  border-radius: 50%;
+  padding: 7px;
+}
+
+.imgIcon:hover {
+  color: #e4e4e4c2;
+} */
+
+.imageOptionsParent {
+  left: 13%;
+  bottom: 15%;
+  z-index: 1;
+  position: absolute;
+  color: #ffffffd9;
+  background-color: rgb(42 49 57 / 42%);
+}
+
+.imageOptionsChild {
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px;
+  border-bottom: 1px solid #9a9696;
+}
+
+.imageOptionsChild:hover {
+  background: #e9e5e533;
 }

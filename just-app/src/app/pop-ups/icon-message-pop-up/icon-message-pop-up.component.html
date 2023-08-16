@@ -1,0 +1,21 @@
+<div class="popupColors">
+  <div style="background: aliceblue; padding: 20px">
+    <i
+      style="font-size: 50px; color: #39c42d"
+      class="{{ data.icon }}"
+      aria-hidden="true"
+    ></i>
+  </div>
+  <div>
+    {{ data.title }}
+  </div>
+  <div style="font-weight: 500; padding: 10px">
+    {{ data.message }}
+  </div>
+  <div style="font-weight: 400;color: #999797; padding: 0 10px 10px 10px">
+    {{ data.subMessage }}
+  </div>
+  <div style="padding: 20px 10px 10px 10px;">
+    <button class="popUpButton" (click)="onOkCLick()">Ok</button>
+  </div>
+</div>

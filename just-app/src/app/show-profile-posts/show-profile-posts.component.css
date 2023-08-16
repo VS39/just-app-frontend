@@ -1,12 +1,12 @@
 #container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  /* justify-content: center; */
 }
 
-.box {
+.boxIn {
   /* width: 49%; */
-  padding: 2px;
+  /* padding: 2px; */
   /* margin-top: 20px; */
   /* margin-bottom: 20px; */
   border-bottom: 2px solid #0a3754;
@@ -21,6 +21,7 @@
   max-width: 100%;
   cursor: pointer;
   border-radius: 10px;
+  padding: 1px;
   /* margin: 2px; */
   /* height: 100%; */
 }
@@ -40,8 +41,17 @@
 .likesText {
   font-size: 14px;
 }
+.likesText:hover {
+  text-decoration: underline;
+}
 
 .likeIcon {
   height: auto;
   font-size: 18px;
 }
+
+.image-wrapper {
+  width: 100%;
+  height: 50%;
+}
+

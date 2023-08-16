@@ -1,0 +1,34 @@
+<div style="display: flex; max-height: 90vh" class="mainColors backGroundColor">
+  <div style="width: 100%; display: flex; flex-direction: column">
+    <div
+      style="
+        padding: 10px 0 10px 0;
+        display: flex;
+        border-bottom: 1px solid #0a3754;
+        flex: 0 0 auto;
+      "
+    >
+      <div style="width: 90%; margin-left: 10px">
+        <div style="font-weight: bold; align-items: center; display: flex">
+          Comments
+        </div>
+      </div>
+      <div class="classIcon">
+        <mat-icon
+          style="padding-top: 1.6px; padding-left: 0.4px"
+          (click)="close()"
+          >close</mat-icon
+        >
+      </div>
+    </div>
+
+    <div style="flex: 1; overflow-y: auto">
+      <div>
+        <app-show-comments
+          (followActionData)="followActionUser($event)"
+          [data]="data.postImage._value.userData"
+        ></app-show-comments>
+      </div>
+    </div>
+  </div>
+</div>

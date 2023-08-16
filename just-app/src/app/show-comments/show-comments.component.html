@@ -1,0 +1,453 @@
+<div class="backGroundColor">
+  <div
+    *ngFor="let element of data.comments.comments; let i = index"
+    style="padding: 2%; border-bottom: 1px solid #0a3754"
+  >
+    <div style="width: 100%; display: flex">
+      <div style="width: 80%; display: flex">
+        <div>
+          <div (click)="goToProfile(element)" class="ind-post-data">
+            <!-- style="margin-right: 2%" -->
+            <img
+              *ngIf="element.commentedByAvatar != ''"
+              class="profilePic"
+              alt="Avatar"
+              src="{{ element.commentedByAvatar }}"
+            />
+            <i
+              *ngIf="element.commentedByAvatar == ''"
+              style="font-size: 45px"
+              class="fa fa-user-circle noAvatar"
+              ia-hidden="true"
+            ></i>
+          </div>
+        </div>
+
+        <div>
+          <div style="display: flex; align-items: baseline">
+            <div
+              (click)="goToProfile(element)"
+              class="name"
+              style="cursor: pointer"
+            >
+              {{ element.commentedByName }}
+            </div>
+            <div style="margin: 0 5px">.</div>
+            <div class="time">
+              {{
+                getUploadTime(
+                  element.commentUpdateTime == ""
+                    ? element.commentUploadTime
+                    : element.commentUpdateTime
+                )
+              }}
+            </div>
+
+            <div *ngIf="element.isEdited" style="margin: 0 5px">.</div>
+            <div class="time" *ngIf="element.isEdited">(Edited)</div>
+          </div>
+
+          <div
+            (click)="goToProfile(element)"
+            style="cursor: pointer"
+            class="userName"
+          >
+            @{{ element.commentedByUsername }}
+          </div>
+        </div>
+      </div>
+
+      <div style="width: 20%; display: flex; justify-content: end">
+        <div>
+          <mat-icon
+            *ngIf="!element.addReply"
+            class="menuIconsEdit"
+            (click)="replyToComment(element)"
+            >reply</mat-icon
+          >
+          <mat-icon
+            *ngIf="element.addReply"
+            class="menuIconsEdit"
+            (click)="closeReply(element)"
+            >close</mat-icon
+          >
+        </div>
+
+        <div *ngIf="loggedInUserId == element.commentedByUserId">
+          <mat-icon
+            *ngIf="!element.editComment"
+            class="menuIconsEdit"
+            (click)="editComment(element, i)"
+            >edit</mat-icon
+          >
+          <mat-icon
+            *ngIf="element.editComment"
+            class="menuIconsEdit"
+            (click)="closeComment(element)"
+            >close</mat-icon
+          >
+        </div>
+
+        <div
+          *ngIf="
+            loggedInUserId == element.commentedByUserId ||
+            loggedInUserId == data.uploadedById
+          "
+        >
+          <mat-icon class="menuIconsEdit" (click)="deleteComment(element)"
+            >delete_outline</mat-icon
+          >
+        </div>
+      </div>
+    </div>
+
+    <div style="width: 100%; display: flex">
+      <div
+        style="
+          width: 8%;
+          justify-content: center;
+          display: flex;
+          margin: 10px 0;
+        "
+      >
+        <div
+          *ngIf="element.replies.repliesCount > 0"
+          style="border: 1px dashed #d6d4d442; height: 100%; width: 0px"
+        ></div>
+      </div>
+      <div
+        *ngIf="!element.editComment"
+        style="width: 92%; display: flex; align-items: center"
+      >
+        <div *ngIf="element.commentText" style="width: 100%">
+          <div
+          *ngIf="element.commentText.length > trimNo && !element.showFullText"
+            class="bio"
+            style="padding: 15px"
+          >
+            {{ element.commentText.substring(0, trimNo) }}
+
+            <span
+              (click)="showMore(element)"
+              class="bio showMore"
+              *ngIf="!element.showFullText"
+              >...show more</span
+            >
+          </div>
+          <div
+            *ngIf="element.commentText.length <= trimNo || element.showFullText"
+            class="bio"
+            style="padding: 15px"
+          >
+            {{ element.commentText
+            }}<span
+              (click)="hide(element)"
+              class="bio showMore"
+              *ngIf="element.showFullText"
+              >...hide</span
+            >
+          </div>
+        </div>
+
+        <div *ngIf="element.caption" style="width: 100%">
+          <div
+            *ngIf="element.caption.length <= trimNo || element.showFullText"
+            class="bio"
+            style="padding: 15px"
+          >
+            {{ element.caption }}
+
+            <span
+              (click)="hide(element)"
+              class="bio showMore"
+              *ngIf="element.showFullText"
+              >...hide</span
+            >
+          </div>
+        </div>
+
+        <div style="width: 8%; text-align: center">
+          <div>
+            <i
+              *ngIf="!element.likes.isLiked"
+              (click)="likeComment(element)"
+              class="fa fa-heart-o"
+              style="font-size: 12px; cursor: pointer; color: darkgray"
+              aria-hidden="true"
+            ></i>
+            <i
+              *ngIf="element.likes.isLiked"
+              (click)="likeComment(element)"
+              class="fa fa-heart likeActionColor"
+              style="font-size: 12px; cursor: pointer"
+              aria-hidden="true"
+            ></i>
+          </div>
+          <div style="font-size: 12px; color: darkgray">
+            {{ formatNumber(element.likes.count) }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      *ngIf="element.editComment"
+      style="width: 100%; margin-top: 10px; margin-bottom: 15px"
+    >
+      <div style="display: flex; align-items: center; justify-content: center">
+        <textarea
+          (input)="commentInput(commentControl.value)"
+          #commentControl
+          id="commentControl"
+          [ngClass]="{
+            'input-error': addCommentClicked
+          }"
+          cdkTextareaAutosize
+          [(ngModel)]="element.commentText"
+          style="min-height: 40px; font-size: 14px; width: 90%"
+          placeholder="Share your thoughts on this post..."
+          class="input formInput"
+        ></textarea>
+        <mat-icon
+          style="
+            margin-left: 10px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+          "
+          class="post-actions-icons likeIcon"
+          (click)="saveComment(element, i)"
+          >send</mat-icon
+        >
+      </div>
+
+      <div *ngIf="addCommentClicked">
+        <mat-error style="font-size: 14px; margin-left: 10px"
+          >Please write a comment</mat-error
+        >
+      </div>
+    </div>
+
+    <div
+      *ngIf="element.addReply"
+      style="width: 100%; margin-top: 10px; margin-bottom: 15px"
+    >
+      <div style="display: flex; align-items: center; justify-content: center">
+        <textarea
+          (input)="replyInput(replyControl.value)"
+          #replyControl
+          [ngClass]="{
+            'input-error': addReplyClicked
+          }"
+          id="replyControl"
+          cdkTextareaAutosize
+          style="min-height: 40px; font-size: 14px; width: 90%"
+          placeholder="Replying to @{{ element.commentedByUsername }}"
+          class="input formInput"
+        ></textarea>
+        <mat-icon
+          style="
+            margin-left: 10px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+          "
+          class="post-actions-icons likeIcon"
+          (click)="addReply(element)"
+          >send</mat-icon
+        >
+      </div>
+
+      <div *ngIf="addReplyClicked">
+        <mat-error style="font-size: 14px; margin-left: 10px"
+          >Please add a reply</mat-error
+        >
+      </div>
+    </div>
+
+    <div
+      *ngIf="element.replies.repliesCount > 0"
+      style="margin: 0 10px 10px 15px"
+    >
+      <span
+        *ngIf="element.replies.repliesCount == 1"
+        class="viewReply"
+        style="cursor: pointer"
+        (click)="
+          !element.showReplies ? showReplies(element) : hideReplies(element)
+        "
+        >{{ !element.showReplies ? "View 1 reply" : "Hide reply" }}</span
+      >
+      <span
+        *ngIf="element.replies.repliesCount > 1"
+        class="viewReply"
+        style="cursor: pointer"
+        (click)="
+          !element.showReplies ? showReplies(element) : hideReplies(element)
+        "
+        >{{
+          !element.showReplies
+            ? "View " + element.replies.repliesCount + " replies"
+            : "Hide replies"
+        }}</span
+      >
+    </div>
+
+    <div *ngIf="element.showReplies" style="display: flex">
+      <div style="width: 8%; justify-content: center; display: flex">
+        <div
+          style="border: 1px solid #d6d4d442; height: 100%; width: 0px"
+        ></div>
+      </div>
+
+      <div *ngIf="element.showReplies" style="width: 92%">
+        <div *ngFor="let reply of element.replies.replies">
+          <div style="width: 100%; display: flex">
+            <div style="width: 80%; display: flex">
+              <div (click)="goToProfile(reply)" class="ind-post-data">
+                <!-- style="margin-right: 2%" -->
+
+                <img
+                  style="width: 30px; height: 30px"
+                  *ngIf="reply.commentedByAvatar != ''"
+                  class="profilePic"
+                  alt="Avatar"
+                  src="{{ reply.commentedByAvatar }}"
+                />
+                <i
+                  *ngIf="reply.commentedByAvatar == ''"
+                  style="font-size: 30px"
+                  class="fa fa-user-circle noAvatar"
+                  ia-hidden="true"
+                ></i>
+              </div>
+              <div>
+                <div>
+                  <div style="display: flex; align-items: baseline">
+                    <div
+                      (click)="goToProfile(reply)"
+                      style="cursor: pointer"
+                      class="userName"
+                    >
+                      @{{ reply.commentedByUsername }}
+                    </div>
+                    <div style="margin: 0 5px">.</div>
+                    <div class="time">
+                      {{
+                        getUploadTime(
+                          reply.commentUpdateTime == ""
+                            ? reply.commentUploadTime
+                            : reply.commentUpdateTime
+                        )
+                      }}
+                    </div>
+                    <div style="margin-left: 20px">
+                      <i
+                        *ngIf="!reply.likes.isLiked"
+                        (click)="likeReply(element, reply)"
+                        class="fa fa-heart-o"
+                        style="
+                          font-size: 12px;
+                          cursor: pointer;
+                          color: darkgray;
+                        "
+                        aria-hidden="true"
+                      ></i>
+                      <i
+                        *ngIf="reply.likes.isLiked"
+                        (click)="likeReply(element, reply)"
+                        class="fa fa-heart likeActionColor"
+                        style="font-size: 12px; cursor: pointer"
+                        aria-hidden="true"
+                      ></i>
+                    </div>
+                    <div
+                      style="font-size: 12px; margin-left: 5px; color: darkgray"
+                    >
+                      {{ formatNumber(reply.likes.count) }}
+                    </div>
+                  </div>
+
+                  <!-- <div *ngIf="reply.isEdited" style="margin: 0 5px">.</div>
+                    <div class="time" *ngIf="element.isEdited">(Edited)</div> -->
+                </div>
+              </div>
+            </div>
+
+            <div style="width: 20%; display: flex; justify-content: end">
+              <!-- <div>
+                  <mat-icon
+                    class="menuIconsEdit"
+                    (click)="replyToComment(reply)"
+                    >reply</mat-icon
+                  >
+                </div> -->
+
+              <!-- <div *ngIf="loggedInUserId == reply.commentedByUserId">
+                  <mat-icon
+                    *ngIf="!reply.editComment"
+                    class="menuIconsEdit"
+                    (click)="editComment(reply, i)"
+                    >edit</mat-icon
+                  >
+                  <mat-icon
+                    *ngIf="reply.editComment"
+                    class="menuIconsEdit"
+                    (click)="saveComment(reply, i)"
+                    >save</mat-icon
+                  >
+                </div> -->
+              <div
+                *ngIf="
+                  loggedInUserId == reply.commentedByUserId ||
+                  loggedInUserId == data.uploadedById
+                "
+              >
+                <mat-icon
+                  class="menuIconsEdit"
+                  (click)="deleteReply(element, reply)"
+                  >delete_outline</mat-icon
+                >
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="!reply.editComment" style="width: 100%">
+            <!-- <div class="bio" style="margin: 0px 0px 8px 40px">
+              {{ reply.commentText }}
+            </div> -->
+
+            <div
+          *ngIf="reply.commentText.length > trimNo && !reply.showFullText"
+            class="bio"
+            style="padding: 15px"
+          >
+            {{ reply.commentText.substring(0, trimNo) }}
+
+            <span
+              (click)="showMore(reply)"
+              class="bio showMore"
+              *ngIf="!reply.showFullText"
+              >...show more</span
+            >
+          </div>
+          <div
+            *ngIf="reply.commentText.length <= trimNo || reply.showFullText"
+            class="bio"
+            style="padding: 15px"
+          >
+            {{ reply.commentText
+            }}<span
+              (click)="hide(reply)"
+              class="bio showMore"
+              *ngIf="reply.showFullText"
+              >...hide</span
+            >
+          </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

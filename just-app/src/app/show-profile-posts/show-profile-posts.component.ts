@@ -1,100 +1,85 @@
-import { Component, Input } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import {
+  AfterViewChecked,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
-import { ProfileImageExpandComponent } from '../pop-ups/profile-image-expand/profile-image-expand.component';
+import { ImageExpandComponent } from '../pop-ups/image-expand/image-expand.component';
+import { PostService } from '../services/post.service';
+import { EditPostComponent } from '../pop-ups/edit-post/edit-post.component';
+import { CommonService } from '../services/common.service';
+import { DeleteComponent } from '../pop-ups/delete/delete.component';
+import { BehaviorSubject } from 'rxjs';
+import { LikesPopupComponent } from '../pop-ups/likes-popup/likes-popup.component';
+import { AddCommentPopupComponent } from '../pop-ups/add-comment-popup/add-comment-popup.component';
+import { CommentsPopupComponent } from '../pop-ups/comments-popup/comments-popup.component';
 
 @Component({
   selector: 'app-show-profile-posts',
   templateUrl: './show-profile-posts.component.html',
   styleUrls: ['./show-profile-posts.component.css'],
 })
-export class ShowProfilePostsComponent {
-  @Input() userData: any;
+export class ShowProfilePostsComponent implements AfterViewChecked {
+  @Input() userPosts: any;
+  @Input() showEditButtons: boolean = false;
+  @Input() showGridButtons: boolean = false;
   singlePost: boolean = true;
   faHeart = faHeart;
+  loggedInUserId: any;
+  trimNo =200;
   faCircleUser = faCircleUser;
+  @Output() refreshPage: any = new EventEmitter<any>();
+  dataSubject!: BehaviorSubject<any>;
+  postDataPrev: any;
+  showUpdate: boolean = false;
+  updateData2: any;
 
-  userData2: any[] = [
-    {
-      name: 'Mr. Bean',
-      username: 'mrbean',
-      caption: 'I am Bean',
-      time: '3h',
-      likes: '12,313',
-      comments: '102',
-      imgUrl: [
-        './assets/img/bean.jpg',
-        // './assets/img/dua.jpg',
-        // './assets/img/camila.jpeg',
-        // './assets/img/ana.jpeg',
-        // './assets/img/ana.jpeg',
-      ],
-    },
-    {
-      name: 'Dua',
-      username: 'dualipa',
-      caption: 'hey, Dua here ;)',
-      time: '23h',
-      likes: '1,012,313',
-      comments: '4,127',
-      imgUrl: [
-        './assets/img/dua.jpg',
-        // './assets/img/dua.jpg',
-        // './assets/img/camila.jpeg',
-      ],
-    },
-    {
-      name: 'Camila',
-      username: 'cabello.camila',
-      caption: 'Hey!',
-      time: '13h',
-      likes: '800,443',
-      comments: '1,509',
-      imgUrl: ['./assets/img/camila.jpeg',
-      //  './assets/img/beach.jpg'
-      ],
-    },
-    {
-      name: 'Undertaker',
-      username: 'rip',
-      caption: 'Ride to heaven',
-      time: '6h',
-      likes: '12,313',
-      comments: '889',
-      imgUrl: [
-        './assets/img/beach.jpg',
-        // './assets/img/bean.jpg',
-        // './assets/img/dua.jpg',
-        // './assets/img/camila.jpeg',
-        // './assets/img/ana.jpeg',
-      ],
-    },
-    {
-      name: 'Ana',
-      username: 'yours_ana',
-      caption: 'Hi, I am Ana',
-      time: '2h',
-      likes: '3,442,066',
-      comments: '6,984',
-      imgUrl: ['./assets/img/ana.jpeg'],
-    },
-    {
-      name: 'Zara',
-      username: 'zara',
-      caption: 'heyy!!',
-      time: '2h',
-      likes: '642,330',
-      comments: '938',
-      imgUrl: ['./assets/img/zara.jpg'],
-    },
-  ];
-
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    public postService: PostService,
+    public commonService: CommonService,
+    private cdRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
-    console.log(this.userData);
-    console.log(this.userData2);
+    this.loggedInUserId = localStorage.getItem('userId');
+    this.getLimitedItems();
+  }
+
+  ngAfterViewChecked() {
+    this.getLimitedItems();
+    if (this.userPosts) {
+      this.userPosts.forEach((element: any, i: number) => {
+        if (this.singlePost) {
+          if (element.image.length == 2) {
+            element.height = 245;
+            element.width = '50%';
+          }
+          if (element.image.length > 2) {
+            element.height = 149;
+            element.width = '50%';
+          }
+        }
+        if (!this.singlePost) {
+          if (element.image.length == 2) {
+            element.height = 298;
+            element.width = '50%';
+          }
+
+          if (element.image.length > 2) {
+            element.height = 149;
+            element.width = '50%';
+          }
+        }
+
+        this.cdRef.detectChanges();
+      });
+    }
   }
 
   changeGrid() {
@@ -102,57 +87,213 @@ export class ShowProfilePostsComponent {
   }
 
   likePicture(post: any) {
-    post.liked = !post.liked;
+    let filter = {
+      userId: this.loggedInUserId,
+    };
+    this.postService.like(post._id, filter).subscribe((data: any) => {
+      if (data != null) {
+        if (data.Success) {
+          // post.liked = !post.liked;
+          this.refreshPage.emit('Refresh');
+        }
+      }
+    });
   }
 
-  expandImage(element: any) {
-    const dialogRef = this.dialog.open(ProfileImageExpandComponent, {
+  setIsLikedProperty(): void {
+    // Iterate through the posts and set the isLiked property based on the logged-in user's liking
+    this.userPosts.forEach((post: any) => {
+      post.likes.isLiked = post.likes.users.some(
+        (user: any) => user._id === this.loggedInUserId
+      );
+    });
+  }
+
+  getLimitedItems() {
+    if (this.userPosts) {
+      this.userPosts.forEach((element: any) => {
+        if (element.image.length > 4) {
+          element.image2 = element.image.slice(0, 4);
+        } else {
+          element.image2 = element.image;
+        }
+      });
+      this.setIsLikedProperty();
+    }
+    if (this.showUpdate) {
+      this.updateData2 = this.userPosts;
+      let element;
+      if (this.updateData2) {
+        this.updateData2.forEach((data: any) => {
+          if (this.postDataPrev.userData._id == data._id) {
+            element = data;
+          }
+        });
+      }
+
+      let postData = {
+        userData: element,
+        clickedImage: this.postDataPrev.clickedImage,
+      };
+
+      this.dataSubject.next(postData);
+    }
+  }
+
+  goToProfile(element: any) {
+    window.location.href = '/' + element.uploadedByUsername;
+  }
+
+  editPost(element: any) {
+    const dialogRef = this.dialog.open(EditPostComponent, {
       data: element,
-      width: '1000px',
-      // height: '700px',
+      width: '600px',
+      // height: '90%',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Result: ${result}`);
+      if (result) {
+        this.refreshPage.emit('Refresh');
+      }
     });
   }
 
-  getStyle(): any {
-    const styles: any = {};
-    this.userData2.forEach((element: any) => {
-      if (element.imgUrl.length == 2) {
-        styles.height = '245px';
-        styles.width = '50%';
-        if (!this.singlePost) {
-          styles.height = '298px';
-        }
+  deletePost(element: any) {
+    const dialogRef = this.dialog.open(DeleteComponent, {
+      data: {
+        icon: 'fa fa-trash-o',
+        message: 'Are you sure you want to delete?',
+        button: 'Delete',
+      },
+    });
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result == 'Delete') {
+        this.postService.deletePost(element._id).subscribe((data: any) => {
+          if (data != null) {
+            if (data.Success) {
+              this.refreshPage.emit('Refresh');
+            }
+          }
+        });
       }
+    });
+  }
 
-      if (element.imgUrl.length >= 3) {
-        styles.height = '149px';
-        styles.width = '50%';
+  getUploadTime(uploadedTime: any) {
+    return this.commonService.getUploadTime(uploadedTime);
+  }
+
+  seeLikes(element: any) {
+    const dialogRef = this.dialog.open(LikesPopupComponent, {
+      data: element,
+      width: '600px',
+      // height: '90%',
+    });
+
+    // Subscribe to the data observable of the dialog component
+    dialogRef.componentInstance.data$.subscribe((data: any) => {
+      if (data) {
+        this.refreshPage.emit('Refresh');
       }
     });
 
-    return styles;
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.refreshPage.emit('Refresh');
+      }
+    });
   }
 
-  img: any[]=[];
-  // getLimitedItems(): any[] {
-  //   this.img = [];
-  //   this.userData2.forEach((element: any) => {
-  //     // if (element.imgUrl.length > 4) {
-  //     //   return element.imgUrl.slice(0, 4);
-  //     // } else {
-  //     //   return element.imgUrl;
-  //     // }
-  //     this.img.push(element.imgUrl);
-  //   });
-  //   console.log(this.img)''
-  //   if (this.img.length > 4) {
-  //     return this.img.slice(0, 4);
-  //   } else {
-  //     return this.img;
-  //   }
-  // }
+  addComment(element: any) {
+    const dialogRef = this.dialog.open(AddCommentPopupComponent, {
+      data: element,
+      width: '600px',
+      // height: '90%',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.refreshPage.emit('Refresh');
+      }
+    });
+  }
+
+  showComments(element: any) {
+    let postData = {
+      userData: element,
+    };
+    this.postDataPrev = postData;
+    this.dataSubject = new BehaviorSubject<any>(postData);
+
+    const dialogRef = this.dialog.open(CommentsPopupComponent, {
+      data: {
+        postImage: this.dataSubject,
+        updateData: this.updateData.bind(this),
+      },
+      width: '600px',
+      // height: '700px',
+    });
+
+    // Subscribe to the data observable of the dialog component
+    dialogRef.componentInstance.data$.subscribe((data: any) => {
+      if (data) {
+        this.refreshPage.emit('Refresh');
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      // console.log(`Result: ${result}`);
+    });
+  }
+
+  expandImage(element: any, clickedImage: any) {
+    let postData = {
+      userData: element,
+      clickedImage: clickedImage,
+    };
+    this.postDataPrev = postData;
+    this.dataSubject = new BehaviorSubject<any>(postData);
+
+    const dialogRef = this.dialog.open(ImageExpandComponent, {
+      data: {
+        postImage: this.dataSubject,
+        updateData: this.updateData.bind(this),
+      },
+      height: '95vh',
+      maxWidth: '95vw',
+      minWidth: '95vw',
+      // width: '1130px',
+      // height: '700px',
+    });
+
+    // Subscribe to the data observable of the dialog component
+    dialogRef.componentInstance.data$.subscribe((data: any) => {
+      if (data) {
+        this.refreshPage.emit('Refresh');
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      // console.log(`Result: ${result}`);
+    });
+  }
+
+  updateData(postDataPrev: any, msg?: any) {
+    this.showUpdate = false;
+    if (msg) {
+      this.refreshPage.emit('Refresh');
+    } else {
+      this.likePicture(postDataPrev.userData);
+    }
+
+    this.showUpdate = true;
+  }
+
+  showMore(element: any) {
+    element.showFullText = true;
+  }
+
+  hide(element: any) {
+    element.showFullText = false;
+  }
 }

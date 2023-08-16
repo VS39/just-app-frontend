@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
+import { ForgotPasswordComponent } from '../pop-ups/forgot-password/forgot-password.component';
+import { MatDialog } from '@angular/material/dialog';
+import { CommonService } from '../services/common.service';
+import { AuthService } from '../authentication/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,37 +13,58 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  username: any = '';
-  password: any = '';
-  showRedSpan: boolean = false;
+  submitted: boolean = false;
+  showPassword: boolean = false;
 
-  constructor(private router: Router) {}
+  form = new FormGroup({
+    Username: new FormControl('', [Validators.required]),
+    Password: new FormControl('', [Validators.required]),
+  });
 
-  login() {
-    console.log(this.username);
-    console.log(this.password);
-    if (this.username == '' || this.password == '') {
-      this.showRedSpan = true;
-    } else {
-      this.showRedSpan = false;
-      this.router.navigate(['home']);
-    }
-  }
+  constructor(
+    private router: Router,
+    private commonService: CommonService,
+    private authService: AuthService,
+    public dialog: MatDialog
+  ) {}
 
-  signup() {
+  errorMessage: any = '';
+
+  signUp() {
     this.router.navigate(['signup']);
   }
 
-  backToHome() {
-    this.username = '';
-    this.password = '';
+  eyeIconClick() {
+    this.showPassword = !this.showPassword;
   }
 
-  usernameClick(user: any) {
-    this.username = user;
+  forgotPassword() {
+    const dialogRef = this.dialog.open(ForgotPasswordComponent, {});
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+      }
+    });
   }
 
-  passwordClick(pass: any) {
-    this.password = pass;
+  logIn() {
+    this.submitted = true;
+    this.errorMessage = '';
+    if (this.form.valid) {
+      this.authService
+        .logIn(
+          this.form.controls.Username.value,
+          this.commonService.encrypt(this.form.controls.Password.value)
+        )
+        .subscribe((data: any) => {
+          if (data != null) {
+            if (data.Success) {
+              this.errorMessage = '';
+              this.router.navigate(['home']);
+            } else {
+              this.errorMessage = data.message;
+            }
+          }
+        });
+    }
   }
 }

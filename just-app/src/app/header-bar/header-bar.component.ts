@@ -7,9 +7,5 @@ import { Router } from '@angular/router';
   styleUrls: ['./header-bar.component.css'],
 })
 export class HeaderBarComponent {
-  // constructor(private router: Router) {}
 
-  // showProfile() {
-  //   this.router.navigate(['user']);
-  // }
 }
