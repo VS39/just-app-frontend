@@ -1,34 +1,69 @@
-<div>
+<div *ngIf="data && data.length != 0">
   <div
-    *ngFor="let element of userData"
+    *ngFor="let element of data"
     style="padding: 2%; border-bottom: 1px solid #0a3754"
   >
     <div style="display: flex; align-items: center; width: 100%">
-      <div style="width: 80%; display: flex">
-        <div
-          class="ind-post-data"
-          style="
-            border: 1px solid #151414;
-            border-radius: 50%;
-            margin-right: 2%;
-            width: 10%;
-          "
-        >
-          <img class="profilePic" alt="Avatar" src="{{element.imgUrl}}" />
+      <div
+        style="width: 80%; display: flex; cursor: pointer"
+        (click)="goToProfile(element)"
+      >
+        <div class="ind-post-data" style="margin-right: 2%; width: 10%">
+          <img
+            *ngIf="element.profilePic != ''"
+            class="profilePic"
+            alt="Avatar"
+            src="{{ element.profilePic }}"
+          />
+          <i
+            *ngIf="element.profilePic == ''"
+            style="font-size: 45px"
+            class="fa fa-user-circle noAvatar"
+            ia-hidden="true"
+          ></i>
         </div>
         <div style="width: 90%">
-          <div  class="name">{{element.name}}</div>
-          <div class="userName">@{{element.username}}</div>
-          <div class="bio">{{element.caption}}</div>
+          <div class="name">{{ element.name }}</div>
+          <div class="userName">@{{ element.username }}</div>
+          <div class="bio" style="margin-top: 5px">{{ element.bio }}</div>
         </div>
       </div>
 
-      <div style="width: 20%">
-        <div *ngIf="showTab == 'followers'" class="mainButton">Follow</div>
-        <div *ngIf="showTab == 'following'" class="mainButtonFollowing">
+      <div style="width: 20%" *ngIf="loggedInUserId != element._id">
+        <div
+          *ngIf="!element.showFollowingButton"
+          class="mainButton"
+          (click)="follow(element)"
+        >
+          Follow
+        </div>
+        <div
+          *ngIf="element.showFollowingButton"
+          class="mainButtonFollowing"
+          (click)="unfollow(element)"
+        >
           Following
         </div>
       </div>
+
+      <div style="width: 20%" *ngIf="loggedInUserId == element._id"></div>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="data && data.length == 0"
+  style="text-align: center; padding: 30px; font-weight: bold"
+>
+  <div *ngIf="showTab == 'followers'" style="font-size: 14px">
+    No followers to show
+  </div>
+  <div *ngIf="showTab == 'following'">
+    <div *ngIf="showEditButtons" style="font-size: 14px">
+      You are not following anyone
+    </div>
+    <div *ngIf="!showEditButtons" style="font-size: 14px">
+      <span class="username">@{{ username }}</span> is not following anyone
     </div>
   </div>
 </div>

@@ -1,0 +1,155 @@
+<div style="display: flex; max-height: 90vh" class="mainColors backGroundColor">
+  <div style="width: 100%; display: flex; flex-direction: column">
+    <div
+      style="
+        padding: 10px 0 10px 0;
+        display: flex;
+        border-bottom: 1px solid #0a3754;
+        flex: 0 0 auto;
+      "
+    >
+      <div style="width: 90%; margin-left: 10px">
+        <div style="font-weight: bold; align-items: center; display: flex">
+          Edit Post
+        </div>
+      </div>
+      <!-- <div style="width: 10%; text-align: end; margin-right: 5px">
+          <div>
+            <mat-icon (click)="close()">close</mat-icon>
+          </div>
+        </div> -->
+      <div class="classIcon">
+        <mat-icon
+          style="padding-top: 1.6px; padding-left: 0.4px"
+          (click)="close()"
+          >close</mat-icon
+        >
+        <!-- style="padding-top: 2px; padding-left: 1px" -->
+      </div>
+    </div>
+
+    <div style="flex: 1; overflow-y: auto">
+      <div style="margin: 20px">
+        <div style="width: 100%; background: #010f18">
+          <textarea
+          [(ngModel)]="caption"
+            cdkTextareaAutosize
+            style="min-height: 50px"
+            placeholder="Add your caption here..."
+            class="input formInput"
+          ></textarea>
+          <!-- <span
+            class="textarea"
+            role="textbox"
+            contenteditable
+            #captionControl
+            >{{ caption }}</span -->
+          
+        </div>
+      </div>
+
+      <div
+        *ngIf="images"
+        class="backGroundColor"
+        style="justify-content: center; padding-bottom: 20px; display: flex"
+      >
+        <div id="container">
+          <div
+            style="position: relative"
+            *ngFor="let element of getLimitedItems()"
+            class="box"
+            [ngStyle]="getStyle()"
+          >
+            <div class="classIcon" *ngIf="images.length != 1">
+              <mat-icon
+                [ngStyle]="
+                  element.deleteImage == true ? { background: '#d60f0f' } : {}
+                "
+                style="
+                  padding-top: 1.6px;
+                  padding-left: 0.4px;
+                  border-radius: 50%;
+                "
+                (click)="getImagesToDelete(element)"
+                >close</mat-icon
+              >
+              <!-- style="padding-top: 2px; padding-left: 1px" -->
+            </div>
+            <img
+              style="
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+                object-fit: cover;
+              "
+              src="{{ element.path }}"
+              alt="Users Pics"
+              class="allPosts"
+            />
+          </div>
+          <div
+            *ngIf="images.length > 4"
+            style="width: 100%; display: flex; justify-content: end"
+          >
+            <div
+              style="cursor: pointer; display: flex; align-items: center"
+              (click)="showMoreImages()"
+            >
+              <div *ngIf="!showAllImages" style="margin-right: 10px">
+                + {{ images.length - 4 }} more image(s)
+              </div>
+              <div *ngIf="showAllImages" style="margin-right: 10px">Hide</div>
+              <div>
+                <fa-icon
+                  style="cursor: pointer"
+                  class="post-actions-icons"
+                  [icon]="
+                    showAllImages ? faChevronCircleUp : faChevronCircleDown
+                  "
+                  transform="grow-1"
+                ></fa-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      style="
+        width: 100%;
+        flex: 0 0 auto;
+        align-items: center;
+        display: flex;
+        padding: 15px 20px 15px 20px;
+        border-top: 1px solid #0a3754;
+      "
+      class="backGroundColor"
+    >
+      <div style="width: 80%">
+        <div
+          *ngIf="deleteImageIds && deleteImageIds.length > 0"
+          style="font-size: 14px; margin-right: 10px"
+        >
+          The selected image(s) will be deleted from this post when you press
+          Save
+        </div>
+      </div>
+      <div style="width: 20%; display: flex">
+        <div class="mainButtonBackgound" style="margin-right: 10px">
+          <div style="padding: 3px; font-size: 14px" (click)="close()">
+            Cancel
+          </div>
+        </div>
+        <div class="mainButtonBackgound">
+          <div
+            style="padding: 3px; font-size: 14px"
+            (click)="update()"
+          >
+            Save
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

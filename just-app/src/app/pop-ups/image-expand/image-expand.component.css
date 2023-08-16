@@ -47,3 +47,20 @@ ngb-carousel .wrapper > img {
   height:auto;
   width:auto;
 }
+
+.likesText {
+  font-size: 14px;
+}
+.likesText:hover {
+  text-decoration: underline;
+}
+
+.likeIcon {
+  height: auto;
+  font-size: 18px;
+}
+
+/* .cdk-overlay-pane {
+  width: 95vw !important;
+  max-width: 95vw !important;
+} */

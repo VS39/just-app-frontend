@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { CommonService } from '../services/common.service';
+import { AuthService } from '../authentication/auth.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,49 +13,106 @@ import { UserService } from '../services/user.service';
 })
 export class SignUpComponent {
   submitted: boolean = false;
+  existingUsername: boolean = false;
+  showPassword: boolean = false;
 
-  signupForm = new FormGroup({
-    Email: new FormControl('', [Validators.required, Validators.email]),
+  form = new FormGroup({
+    Email: new FormControl('', [
+      Validators.required,
+      Validators.pattern(
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      ),
+    ]),
     Name: new FormControl('', [Validators.required]),
     Username: new FormControl('', [Validators.required]),
     Password: new FormControl('', [Validators.required]),
   });
 
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(
+    private datePipe: DatePipe,
+    private router: Router,
+    private userService: UserService,
+    private authService: AuthService,
+    private commonService: CommonService
+  ) {}
 
-  signup() {
-    this.submitted = true;
+  checkExistingUser() {
+    let filter = {
+      username: this.form.controls.Username.value,
+    };
 
-    if (this.signupForm.valid) {
-      let filter = {
-        name: this.signupForm.controls.Name.value,
-        email: this.signupForm.controls.Email.value,
-        password: this.signupForm.controls.Password.value,
-        username: this.signupForm.controls.Username.value,
-      };
-
-      this.userService.signUp(filter).subscribe((data: any) => {
-        console.log(data);
-        if (data != null) {
-          if (data.Success) {
-            this.router.navigate(['home']);
-          }
+    this.userService.checkExistingUser(filter).subscribe((data: any) => {
+      if (data != null) {
+        if (data.Success) {
+          this.existingUsername = false;
+        } else {
+          this.existingUsername = true;
         }
-      });
-    }
+      }
+    });
   }
 
-  login() {
+  eyeIconClick() {
+    this.showPassword = !this.showPassword;
+  }
+
+  logIn() {
     this.router.navigate(['login']);
   }
 
   getEmailErrorMessage() {
-    if (this.signupForm.controls.Email.hasError('required')) {
+    if (this.form.controls.Email.hasError('required')) {
       return 'Please enter email.';
     }
 
-    return this.signupForm.controls.Email.hasError('email')
+    return this.form.controls.Email.errors?.['pattern']
       ? 'Please enter a valid email.'
       : '';
+  }
+
+  getUsernameErrorMessage() {
+    if (this.existingUsername) {
+      return 'Username already exists.';
+    }
+
+    return this.form.controls.Username.hasError('required')
+      ? 'Please enter username.'
+      : '';
+  }
+
+  signUp() {
+    const now = new Date();
+    let currentDate = this.datePipe.transform(now, 'yyyy-MM-dd');
+    let currentTime = this.datePipe.transform(now, 'HH:mm:ss');
+    let time: any;
+    if (currentDate && currentTime) {
+      time = currentDate + ' ' + currentTime;
+    }
+
+    this.submitted = true;
+
+    if (this.form.valid && !this.existingUsername) {
+      let filter = {
+        name: this.form.controls.Name.value,
+        email: this.form.controls.Email.value,
+        password: this.commonService.encrypt(this.form.controls.Password.value),
+        username: this.form.controls.Username.value,
+        joinedTime: time,
+      };
+
+      this.authService.signUp(filter).subscribe((data: any) => {
+        if (data != null) {
+          if (data.Success) {
+            this.commonService.openIconMessagePopUp(
+              'fa fa-check-circle-o',
+              'You have successfully signed up.',
+              '',
+              'Login to upload your first post.'
+            );
+            this.router.navigate(['login']);
+          }
+        }
+      });
+    }
   }
 }
